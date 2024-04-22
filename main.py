@@ -39,15 +39,17 @@ def login():
         password = request.form['password']
         account = conn.execute(text("SELECT * FROM Users WHERE username = :username AND password = :password"), request.form)
         user_data = account.fetchone()
-        if not account:
-            redirect(url_for("index"))
-        elif account:
-            return True
+        if not user_data:
+            flash("Account does not exist", 'error')
+            return redirect(url_for('login'))
+        elif user_data:
+            return redirect(url_for('index'))
     return render_template('login.html')
 
 
-
-
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    msg = ''
 
 if __name__ == '__main__':
     app.run(debug=True)
