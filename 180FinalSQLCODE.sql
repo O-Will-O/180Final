@@ -2,7 +2,7 @@ create database 180Final;
 use 180Final;
 
 create table Users (
-userName varchar(200) Primary key,
+userName varchar(200) Primary key unique,
 name varchar(200) not null,
 email varchar(200),
 password varchar(64),
@@ -110,3 +110,10 @@ receiverUserName varchar(50),
 foreign key (writerUserName) references Users(userName),
 foreign key (receiverUserName) references Users(userName)
 );
+
+insert into Users () values ("Customer1", "John Doe", "ThisMaEmail@email.com", "Cpass", "Customer");
+insert into Users () values ("Customer2", "Jane Doe", "ThisMaEmail2@email.com", "Cpass2", "Customer");
+insert into Users () values ("Admin1", "Jimmy Smith", 'AdminEmail@email.com', "Apass", "Admin");
+insert into Users () values ("Admin2", "Jenny Smith", 'AdminEmail2@email.com', "Apass2", "Admin");
+insert into Users () values ("Vendor1", "Jack Williams", "VendorEmail@email.com", "Vpass", "Vendor");
+insert into Users () values ("Vendor2", "Jess Williams", "VendorEmail2@email.com", "Vpass2", "Vendor");

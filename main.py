@@ -15,5 +15,39 @@ engine = create_engine(conn_str, echo=True)
 conn = engine.connect()
 
 
+
+def Checkexist(username):
+     username = str(username)
+     account = conn.execute(text("SELECT username FROM Users WHERE username = :username"), {'username': username})
+     result = account.fetchone()
+     if result:
+         return True
+     else:
+        return False
+
+@app.route("/")
+def index():
+    if 'loggedin' in session:
+        return render_template("index.html")
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        account = conn.execute(text("SELECT * FROM Users WHERE username = :username AND password = :password"), request.form)
+        user_data = account.fetchone()
+        if not account:
+            redirect(url_for("index"))
+        elif account:
+            return True
+    return render_template('login.html')
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
