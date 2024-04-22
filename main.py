@@ -10,7 +10,7 @@ app.secret_key = 'secret_key'
 
 
 # connection string is in the format mysql://user:password@server/database
-conn_str = "mysql://root:Ilikegames05!@localhost/170final"
+conn_str = "mysql://root:Ilikegames05!@localhost/180final"
 engine = create_engine(conn_str, echo=True)
 conn = engine.connect()
 
