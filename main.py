@@ -43,9 +43,20 @@ def login():
             flash("Account does not exist", 'error')
             return redirect(url_for('login'))
         elif user_data:
+            session['loggedin'] = True
+            session['Username'] = user_data[0]
+            session["Name"] = user_data[1]
+            session["UserType"] = user_data[4]
             return redirect(url_for('index'))
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('loggedin', None)
+    session.pop('Username', None)
+    session.pop('Name', None)
+    session.pop('UserType', None)
+    return redirect(url_for('login'))
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
