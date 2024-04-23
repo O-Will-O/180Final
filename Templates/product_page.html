@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    
+    <!-- the code for the products view is placeholder stuff since we won't properly be able to connect stuff via SQL until we finish more pages -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .navbar {
+            background-color: #444;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .filter-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 0 10px;
+        }
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 20px;
+        }
+        .product {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .product h2 {
+            margin-top: 0;
+        }
+        .product p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Browse Products</h1>
+</header>
+
+<!-- update this w/ actual links once pages are done -->
+<nav class="navbar">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">My Account</a></li>
+        <li><a href="#">Cart</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search by name, description, or vendor">
+    </div>
+    
+    <div class="filter-container">
+        <select id="filterOptions">
+            <option value="">Filter Options</option>
+            <option value="category">Category</option>
+            <option value="color">Color</option>
+            <option value="size">Size</option>
+            <option value="availability">Availability</option>
+        </select>
+        <select id="filterValues">
+            <option value="">-- Select a filter option --</option>
+        </select>
+    </div>
+
+    <div class="product-container" id="productContainer">
+        <!-- Products will be added here -->
+    </div>
+</div>
+
+<script>
+    const filterOptions = document.getElementById('filterOptions');
+    const filterValues = document.getElementById('filterValues');
+
+    const filterData = {
+        category: ['Electronics', 'Clothing', 'Books', 'Home & Kitchen'],
+        color: ['Red', 'Blue', 'Green', 'Yellow'],
+        size: ['Small', 'Medium', 'Large', 'XL'],
+        availability: ['In Stock', 'Out of Stock']
+    };
+
+    function populateFilterValues(selectedOption) {
+        filterValues.innerHTML = '<option value="">-- Select a filter option --</option>';
+
+        const values = filterData[selectedOption];
+
+        values.forEach(value => {
+            const option = document.createElement('option');
+            option.value = value.toLowerCase().replace(/\s+/g, '_');
+            option.textContent = value;
+            filterValues.appendChild(option);
+        });
+    }
+
+    filterOptions.addEventListener('change', function() {
+        const selectedOption = this.value;
+        if (selectedOption) {
+            populateFilterValues(selectedOption);
+        } else {
+            // Reset filter values dropdown if no option is selected
+            filterValues.innerHTML = '<option value="">-- Select a filter option --</option>';
+        }
+    });
+
+    // Sample data for product items (can be replaced with actual data from database)
+    const products = [
+        { name: 'Product 1', description: 'Description of Product 1', vendor: 'Vendor 1', category: 'Electronics', color: 'Red', size: 'Medium', availability: 'In Stock', image: 'https://via.placeholder.com/150' },
+        { name: 'Product 2', description: 'Description of Product 2', vendor: 'Vendor 2', category: 'Clothing', color: 'Blue', size: 'Large', availability: 'Out of Stock', image: 'https://via.placeholder.com/150' },
+        { name: 'Product 3', description: 'Description of Product 3', vendor: 'Vendor 3', category: 'Books', color: 'Green', size: 'Small', availability: 'In Stock', image: 'https://via.placeholder.com/150' },
+        { name: 'Product 4', description: 'Description of Product 4', vendor: 'Vendor 4', category: 'Home & Kitchen', color: 'Yellow', size: 'XL', availability: 'Out of Stock', image: 'https://via.placeholder.com/150' },
+    ];
+
+    function displayProducts(products) {
+        const productContainer = document.getElementById('productContainer');
+        productContainer.innerHTML = '';
+
+        products.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product');
+
+            const image = document.createElement('img');
+            image.src = product.image;
+            productDiv.appendChild(image);
+
+            const nameHeading = document.createElement('h2');
+            nameHeading.textContent = product.name;
+            productDiv.appendChild(nameHeading);
+
+            const descriptionPara = document.createElement('p');
+            descriptionPara.textContent = product.description;
+            productDiv.appendChild(descriptionPara);
+
+            const vendorPara = document.createElement('p');
+            vendorPara.textContent = 'Vendor: ' + product.vendor;
+            productDiv.appendChild(vendorPara);
+
+            const categoryPara = document.createElement('p');
+            categoryPara.textContent = 'Category: ' + product.category;
+            productDiv.appendChild(categoryPara);
+
+            const colorPara = document.createElement('p');
+            colorPara.textContent = 'Color: ' + product.color;
+            productDiv.appendChild(colorPara);
+
+            const sizePara = document.createElement('p');
+            sizePara.textContent = 'Size: ' + product.size;
+            productDiv.appendChild(sizePara);
+
+            const availabilityPara = document.createElement('p');
+            availabilityPara.textContent = 'Availability: ' + product.availability;
+            productDiv.appendChild(availabilityPara);
+
+            productContainer.appendChild(productDiv);
+        });
+    }
+    
+    displayProducts(products);
+</script>
+
+</body>
+</html>
+
+
