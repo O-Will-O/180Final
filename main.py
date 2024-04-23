@@ -46,10 +46,13 @@ def login():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
-        account = conn.execute(text("SELECT * FROM Users WHERE username = :username AND password = :password"), request.form)
+        account = conn.execute(text("SELECT * FROM Users WHERE username = :username OR password = :password"), request.form)
         user_data = account.fetchone()
-        if not user_data:
+        if user_data[0] != username:
             flash("Account does not exist", 'error')
+            return redirect(url_for('login'))
+        elif user_data[3] != password:
+            flash("Incorrect Password", 'error')
             return redirect(url_for('login'))
         elif user_data:
             session['loggedin'] = True
