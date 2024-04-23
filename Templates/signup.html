@@ -57,7 +57,11 @@
 
 
 <form action="{{ url_for('signup') }}" method="post">
-    <div class="msg">{{ msg }}</div>
+    <select name="accountType" id="accountType">
+        <option value="Customer">Customer</option>
+        <option value="Vendor">Vendor</option>
+        <option value="Admin">Admin</option>
+    </select> <br><br>
     <input id="username" name="username" type="text" placeholder="Enter your username" class="textbox" required/><br><br>
     <input id="password" name="password" type="password" placeholder="Enter your password" class="textbox" required/><br><br>
     <input id="email" name="email" type="email" placeholder="Enter your email address" class="textbox" required/><br><br>

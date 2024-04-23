@@ -16,9 +16,18 @@ conn = engine.connect()
 
 
 
-def Checkexist(username):
+def CheckexistUser(username):
      username = str(username)
-     account = conn.execute(text("SELECT username FROM Users WHERE username = :username"), {'username': username})
+     account = conn.execute(text("SELECT username FROM Users WHERE username = :username;"), {'username': username})
+     result = account.fetchone()
+     if result:
+         return True
+     else:
+        return False
+
+def CheckexistEmail(email):
+     email = str(email)
+     account = conn.execute(text("SELECT username FROM Users WHERE email = :email;"), {'email': email})
      result = account.fetchone()
      if result:
          return True
@@ -60,6 +69,24 @@ def logout():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        name = request.form['name']
+        accountType = request.form['accountType']
+        if CheckexistUser(username):
+            flash('This Username Already Exists!', 'error')
+        elif CheckexistEmail(email):
+            flash('This Email Already Exists!', 'error')
+        else:
+            conn.execute(text("insert into users () values (:username, :name, :email, :password, :accountType)"), {"username": username, "name": name, "email": email, "password": password, "accountType": accountType}).all()
+            conn.commit()
+            session['loggedin'] = True
+            session['Username'] = username
+            session["Name"] = name
+            session["UserType"] = accountType
+            return redirect(url_for("index"))
     return render_template('signup.html')
 
 if __name__ == '__main__':
