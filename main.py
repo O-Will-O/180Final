@@ -96,5 +96,13 @@ def signup():
             return redirect(url_for("index"))
     return render_template('signup.html')
 
+@app.route('/cart', methods=['GET', 'POST'])
+def cart():
+    return render_template('cart.html')
+
+@app.route('/productpage', methods=['GET', 'POST'])
+def productpage():
+    return render_template('productpage.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+
+    <!-- code here is placeholder for later when we have all pages complete and can begin linking them together (w/ SQL too) -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .navbar {
+            background-color: #444;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+        .cart-container {
+            margin-top: 20px;
+        }
+        .cart-item {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .cart-item img {
+            max-width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+        .cart-item-details {
+            display: flex;
+            align-items: center;
+        }
+        .cart-item-details p {
+            margin: 0;
+        }
+        .cart-total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .checkout-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .checkout-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Shopping Cart</h1>
+</header>
+
+<!-- link these later!!!! -->
+<nav class="navbar">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">My Account</a></li>
+        <li><a href="#">Cart</a></li>
+    </ul>
+</nav>
+
+<!-- these are all just placeholders -->
+<div class="container">
+    <div class="cart-container">
+        <!-- Cart items will be added here -->
+        <div class="cart-item">
+            <div class="cart-item-details">
+                <img src="https://via.placeholder.com/150" alt="Product Image">
+                <div>
+                    <p><strong>Product Name:</strong> Product 1</p>
+                    <p><strong>Price:</strong> $50.00</p>
+                    <p><strong>Quantity:</strong> 2</p>
+                </div>
+            </div>
+            <div class="cart-item-actions">
+                <button>Edit</button>
+                <button>Remove</button>
+            </div>
+        </div>
+    </div>
+    <div class="cart-total">
+        <p><strong>Total:</strong> $100.00</p>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+</div>
+
+</body>
+</html>
