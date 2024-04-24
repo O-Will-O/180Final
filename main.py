@@ -46,14 +46,16 @@ def login():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
-        account = conn.execute(text("SELECT * FROM Users WHERE username = :username OR password = :password"), request.form)
+        account = conn.execute(text("SELECT * FROM Users WHERE username = :username"), request.form)
         user_data = account.fetchone()
-        if user_data[0] != username:
+        flash(f"{user_data}", "error")
+        print(user_data)
+        if user_data is None:
             flash("Account does not exist", 'error')
-            return redirect(url_for('login'))
+            return render_template('login.html', username=username)
         elif user_data[3] != password:
             flash("Incorrect Password", 'error')
-            return redirect(url_for('login'))
+            return render_template('login.html', username=username)
         elif user_data:
             session['loggedin'] = True
             session['Username'] = user_data[0]
@@ -80,8 +82,10 @@ def signup():
         accountType = request.form['accountType']
         if CheckexistUser(username):
             flash('This Username Already Exists!', 'error')
+            return render_template('signup.html', email=email, name=name)
         elif CheckexistEmail(email):
             flash('This Email Already Exists!', 'error')
+            return render_template('signup.html', username=username, name=name)
         else:
             conn.execute(text("insert into users () values (:username, :name, :email, :password, :accountType)"), {"username": username, "name": name, "email": email, "password": password, "accountType": accountType}).all()
             conn.commit()
