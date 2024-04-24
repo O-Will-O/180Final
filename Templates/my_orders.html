@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    
+    <!-- this is placeholder code, will add functionality once html pages are all set up -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .navbar {
+            background-color: #444;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+        .order-container {
+            margin-top: 20px;
+        }
+        .order {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .order-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .order-details p {
+            margin: 0;
+        }
+        .order-total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>My Orders</h1>
+</header>
+
+<nav class="navbar">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">My Account</a></li>
+        <li><a href="#">Cart</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="order-container">
+        <!-- Orders will be dynamically added here -->
+        <div class="order">
+            <div class="order-details">
+                <p><strong>Order ID:</strong> 123456</p>
+                <p><strong>Date:</strong> January 1, 2024</p>
+            </div>
+            <div class="order-items">
+                <p><strong>Items:</strong></p>
+                <ul>
+                    <li>Product 1 - $50.00</li>
+                    <li>Product 2 - $40.00</li>
+                </ul>
+            </div>
+            <div class="order-total">
+                <p><strong>Total:</strong> $90.00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
