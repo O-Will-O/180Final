@@ -11,7 +11,7 @@ accountType varchar(20)
 
 create table Products (
 PID varchar(50) primary key,
-Title varchar(5) not null,
+Title varchar(20) not null,
 Description varchar(400),
 WarrantyPeriod int,
 nOfItems int,
@@ -148,7 +148,7 @@ insert into ProductSize () values ("P2", "S");
 insert into ProductSize () values ("P2", "M");
 insert into ProductSize () values ("P2", "L");
 
-insert into Products () values ("P3", "Silly Putty", "Tin of silly putty", 30, 400, 9.99, "Vendor1");
+insert into Products () values ("P3", "Putty", "Tin of silly putty", 30, 400, 9.99, "Vendor1");
 insert into ProductHasDiscount () values ("P3", "D4");
 insert into ProductImages () values ("P3", "https://m.media-amazon.com/images/I/71NrauOEq8L.__AC_SX300_SY300_QL70_FMwebp_.jpg");
 insert into ProductImages () values ("P3", "https://m.media-amazon.com/images/I/81df1+j0L8L._AC_SY879_.jpg");
