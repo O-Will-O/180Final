@@ -1,61 +1,115 @@
-<style>
-    form {
-    width: 300px;
-    margin: 0 auto;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    body 
+    {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
 
-.msg {
-    color: red;
-    margin-bottom: 10px;
-}
+    .container 
+    {
+        width: 300px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .login_title
+    {
+        width: fit-content;
+        margin: 10px auto 30px auto;
+        border-bottom: 5px double black;
+    }
 
-.textbox {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+    form 
+    {
+        width: 300px;
+        margin: auto;
+    }
+    
+    .textbox 
+    {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    
+    .btn 
+    {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn:hover 
+    {
+        background-color: #0056b3;
+    }
+    
+    .link_signup 
+    {
+        color: #007bff;
+        text-decoration: none;
+    }
+    
+    .signup_link_holder
+    {
+        width: fit-content;
+        margin: auto;
+    }
+    
+    .link_signup:hover 
+    {
+        text-decoration: underline;
+    }
 
-.btn {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #0056b3;
-}
-
-.bottom {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.bottom:hover {
-    text-decoration: underline;
-}
-</style>
-
-<br><br>
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% for category, message in messages %}
-        {% if category == 'error' %}
-            <script>
-                window.onload = function() {
-                    alert('{{ message }}');
-                }
-            </script>
-        {% endif %}
-    {% endfor %}
-    {% endwith %}
-<form action="{{ url_for('login') }}" method="post">
-        <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"/></br></br>
-        <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/></br></br></br>
-        <input type="submit" class="btn" value="Sign In"></br></br>
-</form>
-<p> Create account  <a class="bottom" href="{{url_for('signup')}}"> here</a></p>
+    .error-message 
+    {
+        color: red;
+        margin-bottom: 10px;
+    }
+    </style>
+<div class="container">
+    <h2 class="login_title">Login</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            {% if category == 'error' %}
+                <script>
+                    window.onload = function() {
+                        alert('{{ message }}');
+                    }
+                </script>
+            {% endif %}
+        {% endfor %}
+        {% endwith %}
+    <form action="{{ url_for('login') }}" method="post">
+            <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"/></br></br>
+            <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/></br></br>
+            <input type="submit" class="btn" value="Sign In"></br></br>
+    </form>
+    <p class="signup_link_holder"> Create account  <a class="link_signup" href="{{url_for('signup')}}"> here</a></p>
+</div>
+</body>
+</html>
