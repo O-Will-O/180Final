@@ -118,11 +118,11 @@ insert into Users () values ("Admin2", "Jenny Smith", 'AdminEmail2@email.com', "
 insert into Users () values ("Vendor1", "Jack Williams", "VendorEmail@email.com", "Vpass", "Vendor");
 insert into Users () values ("Vendor2", "Jess Williams", "VendorEmail2@email.com", "Vpass2", "Vendor");
 
-insert into Discounts () values ("D1", 10.99, "0000-00-00");
-insert into Discounts () values ("D2", 30.99, "0000-00-00");
-insert into Discounts () values ("D3", 5.50, "0000-00-00");
-insert into Discounts () values ("D4", 1.01, "0000-00-00");
-insert into Discounts () values ("D5", 100.50, "0000-00-00");
+insert into Discounts () values ("D1", 10.99, "2025-12-25");
+insert into Discounts () values ("D2", 30.99, "2025-08-20");
+insert into Discounts () values ("D3", 5.50, "2026-12-25");
+insert into Discounts () values ("D4", 1.01, "2026-11-24");
+insert into Discounts () values ("D5", 100.50, "2029-01-01");
 
 
 insert into Products () values ("P1", "T Shirt", "Blank T Shirt", 60, 1000, 15.99, "Vendor1");
