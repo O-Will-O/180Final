@@ -11,7 +11,7 @@ accountType varchar(20)
 
 create table Products (
 PID varchar(50) primary key,
-Title varchar(5) not null,
+Title varchar(20) not null,
 Description varchar(400),
 WarrantyPeriod int,
 nOfItems int,
@@ -148,7 +148,7 @@ insert into ProductSize () values ("P2", "S");
 insert into ProductSize () values ("P2", "M");
 insert into ProductSize () values ("P2", "L");
 
-insert into Products () values ("P3", "Silly Putty", "Tin of silly putty", 30, 400, 9.99, "Vendor1");
+insert into Products () values ("P3", "Putty", "Tin of silly putty", 30, 400, 9.99, "Vendor1");
 insert into ProductHasDiscount () values ("P3", "D4");
 insert into ProductImages () values ("P3", "https://m.media-amazon.com/images/I/71NrauOEq8L.__AC_SX300_SY300_QL70_FMwebp_.jpg");
 insert into ProductImages () values ("P3", "https://m.media-amazon.com/images/I/81df1+j0L8L._AC_SY879_.jpg");
@@ -158,7 +158,7 @@ insert into ProductColor () values ("P3", "Super Illusions Super Scarab");
 insert into ProductColor () values ("P3", "Cosmic Star Dust");
 insert into ProductSize () values ("P3", "S");
 
-insert into Products () values ("P4", "Sweatpants", "Men's Casual Fleece Jogger Sweatpants Cotton Active Running Hiking Elastic Pocket Pants", 60, 300, 49.99, "Vendor");
+insert into Products () values ("P4", "Sweatpants", "Men's Casual Fleece Jogger Sweatpants Cotton Active Running Hiking Elastic Pocket Pants", 60, 300, 49.99, "Vendor2");
 insert into ProductHasDiscount () values ("P4", "D2");
 insert into ProductImages () values ("P4", "https://m.media-amazon.com/images/I/81H4qBgcRlL._AC_SY550_.jpg");
 insert into ProductImages () values ("P4", "https://m.media-amazon.com/images/I/81HuEpiQwZL._AC_SY550_.jpg");
@@ -170,7 +170,7 @@ insert into ProductSize () values ("P4", "S");
 insert into ProductSize () values ("P4", "M");
 insert into ProductSize () values ("P4", "L");
 
-insert into Products () values ("P5", "Flavored Water 12pk", "A pack of 12 bottle of flavored water", 5, 100, 8.99, "Vendor");
+insert into Products () values ("P5", "Flavored Water 12pk", "A pack of 12 bottle of flavored water", 5, 100, 8.99, "Vendor1");
 insert into ProductImages () values ("P5", "https://m.media-amazon.com/images/I/81ca3M+VQAL._SX679_PIbundle-12,TopRight,0,0_AA679SH20_.jpg");
 insert into ProductImages () values ("P5", "https://m.media-amazon.com/images/I/81WHVSp9DbL._SX679_.jpg");
 insert into ProductImages () values ("P5", "https://m.media-amazon.com/images/I/81OqsPWi-SL._SX679_.jpg");
