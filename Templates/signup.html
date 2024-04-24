@@ -1,69 +1,103 @@
-<style>
-.body {
-    width: 300px;
-    margin: 0 auto;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-.msg {
-    color: red;
-    margin-bottom: 10px;
-}
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .signup_title
+        {
+            width: fit-content;
+            margin: 10px auto 30px auto;
+            border-bottom: 5px double black;
+        }
+        .msg {
+            color: red;
+            margin-bottom: 10px;
+        }
 
-.textbox {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+        .textbox {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
 
-.btn {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.btn:hover {
-    background-color: #0056b3;
-}
+        .btn:hover {
+            background-color: #0056b3;
+        }
 
-.bottom {
-    color: #007bff;
-    text-decoration: none;
-}
+        .bottom {
+            color: #007bff;
+            text-decoration: none;
+        }
 
-.bottom:hover {
-    text-decoration: underline;
-}
+        .bottom:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="signup_title">Sign Up</h2>
+        {% block body %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                {% if category == 'error' %}
+                <script>
+                    window.onload = function() {
+                        alert('{{ message }}');
+                    }
+                </script>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
 
-</style>
-{% block body %}
-<div class="body">
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% for category, message in messages %}
-        {% if category == 'error' %}
-            <script>
-                window.onload = function() {
-                    alert('{{ message }}');
-                }
-            </script>
-        {% endif %}
-    {% endfor %}
-{% endwith %}
-
-
-<form action="{{ url_for('signup') }}" method="post">
-    <div class="msg">{{ msg }}</div>
-    <input id="username" name="username" type="text" placeholder="Enter your username" class="textbox" required/><br><br>
-    <input id="password" name="password" type="password" placeholder="Enter your password" class="textbox" required/><br><br>
-    <input id="email" name="email" type="email" placeholder="Enter your email address" class="textbox" required/><br><br>
-    <input id="name" name="name" type="text" placeholder="Enter your Name" class="textbox" required/><br><br>
-    <input type="submit" class="btn" value="Sign Up"><br>
-</form>
-        <p>Already have an account? <a href="/login"> Sign in here</a></p>
+        <form action="{{ url_for('signup') }}" method="post">
+            <select name="accountType" id="accountType" class="textbox">
+                <option value="Customer">Customer</option>
+                <option value="Vendor">Vendor</option>
+                <option value="Admin">Admin</option>
+            </select><br><br>
+            <input id="username" name="username" type="text" placeholder="Username" class="textbox" value="{{username}}" required><br><br>
+            <input id="password" name="password" type="password" placeholder="Password" class="textbox" required><br><br>
+            <input id="email" name="email" type="email" placeholder="Email Address" class="textbox" value="{{email}}" required><br><br>
+            <input id="name" name="name" type="text" placeholder="Full Name" class="textbox" value="{{name}}" required><br><br>
+            <input type="submit" class="btn" value="Sign Up">
+        </form>
+        <p>Already have an account? <a class="bottom" href="{{ url_for('login') }}">Sign in here</a></p>
+        {% endblock %}
     </div>
-{% endblock %}
+</body>
+</html>

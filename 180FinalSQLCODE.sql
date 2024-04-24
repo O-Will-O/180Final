@@ -4,7 +4,7 @@ use 180Final;
 create table Users (
 userName varchar(200) Primary key unique,
 name varchar(200) not null,
-email varchar(200),
+email varchar(200) unique,
 password varchar(64),
 accountType varchar(20)
 );
