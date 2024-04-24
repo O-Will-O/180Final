@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block body %}
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Page</title>
-    
+
     <!-- the code for the products view is placeholder stuff since we won't properly be able to connect stuff via SQL until we finish more pages -->
 
     <style>
@@ -95,20 +98,6 @@
 </head>
 <body>
 
-<header>
-    <h1>Browse Products</h1>
-</header>
-
-<!-- update this w/ actual links once pages are done -->
-<nav class="navbar">
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Register</a></li>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">My Account</a></li>
-        <li><a href="#">Cart</a></li>
-    </ul>
-</nav>
 
 <div class="container">
     <div class="search-container">
@@ -223,6 +212,5 @@
 </script>
 
 </body>
-</html>
-
+{% endblock %}
 
