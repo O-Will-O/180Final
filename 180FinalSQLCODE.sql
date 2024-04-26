@@ -178,3 +178,17 @@ insert into ProductColor () values ("P5", "Kiwi Strawberry");
 insert into ProductColor () values ("P5", "Grape");
 insert into ProductColor () values ("P5", "Watermelon");
 insert into ProductSize () values ("P5", "12pk");
+
+
+
+
+insert into Carts () values ("C1", "Customer1");
+insert into CartHasProduct () values ("C1", "P5", "Grape", "12pk");
+insert into CartHasProduct () values ("C1", "P2", "Emerald", "M");
+insert into CartHasProduct () values ("C1", "P4", "Yellow", "S");
+
+
+insert into Carts () values ("C2", "Admin2");
+insert into CartHasProduct () values ("C2", "P5", "Watermelon", "12pk");
+insert into CartHasProduct () values ("C2", "P3", "Cosmic Star Dust", "S");
+insert into CartHasProduct () values ("C2", "P4", "Blue", "L");
