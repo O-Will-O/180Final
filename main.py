@@ -42,8 +42,9 @@ def CheckexistEmail(email):
         return False
      
 def incrementID(ID):
+    ID = str(ID)
     fletter = ID[0]
-    number = int(ID[1::])
+    number = int(ID[1:])
     next = number + 1
     final = f'{fletter}{next}'
     return final
@@ -124,8 +125,9 @@ def productpage():
 @app.route("/AddProducts", methods=["GET", "POST"])
 def AddProducts():
     if request.method == "POST":
-        result = conn.execute(text("select PID from Products Order By PID DESC;")).all()
-        latestID = result.fetchone()
+        result = conn.execute(text("select PID from Products Order By PID DESC;")).fetchone()
+        latestID = result[0]
+        print(latestID)
         newID = incrementID(latestID)
         # title = request.form["title"]
         # description = request.form["description"]
@@ -136,6 +138,8 @@ def AddProducts():
 
         
         colors = request.form.getlist("color")
+        sizes = request.form.getlist("size")
+        images = request.form.getlist("image")
     return render_template("AddProducts.html")
 
 if __name__ == '__main__':
