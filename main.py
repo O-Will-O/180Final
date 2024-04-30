@@ -129,17 +129,26 @@ def AddProducts():
         latestID = result[0]
         print(latestID)
         newID = incrementID(latestID)
-        # title = request.form["title"]
-        # description = request.form["description"]
-        # warranty = int(request.form["warranty_period"])
-        # stock = int(request.form["n_of_items"])
-        # price = float(request.form["price"])
-        # added_by_username = session["Username"]
-
-        
+        title = request.form["title"]
+        description = request.form["description"]
+        warranty = int(request.form["warranty_period"])
+        stock = int(request.form["n_of_items"])
+        price = float(request.form["price"])
+        added_by_username = session["Username"]
+        conn.execute(text("insert into Products () values (:newID, :title, :description, :warranty, :stock, :price, :added_by_username);"), {"newID": newID, "added_by_username" : added_by_username, "warranty" : warranty, "stock" : stock, "price" : price, "title" : title, "description" :description})
+        conn.commit()
         colors = request.form.getlist("color")
         sizes = request.form.getlist("size")
         images = request.form.getlist("image")
+        for color in colors:
+            conn.execute(text("insert into ProductColor () values (:newID, :color);"), {"color":color, "newID":newID})
+            conn.commit()
+        for size in sizes:
+            conn.execute(text("insert into ProductSize () values (:newID, :size);"), {"size":size, "newID":newID})
+            conn.commit()
+        for image in images:
+            conn.execute(text("insert into ProductImages () values (:newID, :image);"), {"image":image, "newID":newID})
+            conn.commit()
     return render_template("AddProducts.html")
 
 if __name__ == '__main__':
