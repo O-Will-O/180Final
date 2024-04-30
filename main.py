@@ -15,6 +15,13 @@ engine = create_engine(conn_str, echo=True)
 conn = engine.connect()
 
 
+def noCustAlow():
+    typeU = session["UserType"]
+    if typeU == "Customer":
+        return False
+    elif typeU == "Admin" or typeU == "Vendor":
+        return True
+
 
 def CheckexistUser(username):
      username = str(username)
@@ -33,6 +40,15 @@ def CheckexistEmail(email):
          return True
      else:
         return False
+     
+def incrementID(ID):
+    fletter = ID[0]
+    number = int(ID[1::])
+    next = number + 1
+    final = f'{fletter}{next}'
+    return final
+
+
 
 @app.route("/")
 def index():
@@ -102,7 +118,25 @@ def cart():
 
 @app.route('/productpage', methods=['GET', 'POST'])
 def productpage():
-    return render_template('productpage.html')
+    return render_template('product_page.html')
+
+
+@app.route("/AddProducts", methods=["GET", "POST"])
+def AddProducts():
+    if request.method == "POST":
+        result = conn.execute(text("select PID from Products Order By PID DESC;")).all()
+        latestID = result.fetchone()
+        newID = incrementID(latestID)
+        # title = request.form["title"]
+        # description = request.form["description"]
+        # warranty = int(request.form["warranty_period"])
+        # stock = int(request.form["n_of_items"])
+        # price = float(request.form["price"])
+        # added_by_username = session["Username"]
+
+        
+        colors = request.form.getlist("color")
+    return render_template("AddProducts.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

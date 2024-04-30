@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block body %}
+<style>
+    .AddProductContainer {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: grid;
+  grid-gap: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+}
+
+.button-group button {
+  margin-left: 10px;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+</style>
+<br>
+<div class="AddProductContainer">
+    <h2>Add Product</h2>
+  <form action="/AddProducts" method="post">
+    <label for="title">Product Name:</label>
+    <input type="text" id="title" name="title" >
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" ></textarea>
+
+    <label for="warranty">Warranty Period:</label>
+    <input type="text" id="warranty" name="warranty" >
+
+    <label for="stock">Amount in Stock:</label>
+    <input type="number" id="stock" name="stock" >
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" >
+
+    <div id="colorInputs">
+      <label>Colors:</label>
+      <div class="input-group">
+        <input type="text" name="color" >
+        <button type="button" onclick="addInput('colorInputs')">Add Color</button>
+      </div>
+    </div>
+
+    <div id="sizeInputs">
+      <label>Sizes:</label>
+      <div class="input-group">
+        <input type="text" name="size" >
+        <button type="button" onclick="addInput('sizeInputs')">Add Size</button>
+      </div>
+    </div>
+
+    <div id="imageInputs">
+      <label>Image Links:</label>
+      <div class="input-group">
+        <input type="text" name="image" >
+        <button type="button" onclick="addInput('imageInputs')">Add Image Link</button>
+      </div>
+    </div>
+
+    <button type="submit">Add Product</button>
+  </form>
+</div>
+<script>
+function addInput(containerId) {
+  const container = document.getElementById(containerId);
+  const inputGroup = document.createElement('div');
+  inputGroup.classList.add('input-group');
+  inputGroup.innerHTML = `
+    <input type="text" name="${containerId.slice(0, -6)}" required>
+    <button type="button" onclick="removeInput(this)">Remove</button>
+  `;
+  container.appendChild(inputGroup);
+}
+
+function removeInput(button) {
+  button.parentNode.parentNode.removeChild(button.parentNode);
+}
+</script>
+
+{% endblock %}
