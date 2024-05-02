@@ -131,3 +131,21 @@ footer {
   width: fit-content;
   font-size: 3vw;
 }
+.Product_title
+{
+  text-align: center;
+  border-top: 3px ridge black;
+  border-bottom: 3px ridge black;
+  width: 70vw;
+  transition: 400ms;
+  margin: 10px auto;
+  margin-bottom: 50px;
+}
+@media (max-width: 850px)
+{
+  .Incoming, .Accepted-Orders, .Completed-Orders
+  {
+      transition: 400ms;
+      width: 100%;
+  }
+}
