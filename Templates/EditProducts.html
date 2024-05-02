@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+{% block body %}
+<style>
+.Parent_Container {
+    width: 100%; /* Adjust this width as needed */
+    margin: auto;
+    text-align: center; /* Center its child elements horizontally */
+}
+
+.Edit_Product_Container
+{
+    width: fit-content;
+    margin: auto;
+    display: inline-grid;
+    grid-template-columns: 22vw 22vw 22vw 22vw;
+}
+
+.EP_Product {
+    border: 3px solid #ccc;
+    width: 300px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+}
+
+.EP_Item {
+    margin: 5px 0;
+    font-size: 14px;
+}
+.EP_Item strong{
+    text-decoration: underline double;
+}
+.Item_title {
+    font-size: 18px;
+    width: fit-content;
+    margin: auto;
+}
+
+.Item_desc {
+    font-size: 11px;
+    color: #555;
+    line-height: 15px;
+}
+
+.Item_price,
+.Item_discount_amount {
+    color: #007bff; /* Blue color for price and discount amount */
+}
+
+.Item_Discount_available_to {
+    color: #dc3545; /* Red color for discount expiration */
+}
+
+.Item_buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Item_buttons button {
+    width: 125px;
+    cursor: pointer;
+    background-color: #aeaeae;
+    border: 3px inset black;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.Item_buttons button:hover {
+    background-color: #7a8eac;
+    border: 3px outset black;
+}
+
+</style>
+<h1 class="Product_title">Edit Products</h1>
+<div class="Parent_Container">
+<div class="Edit_Product_Container">
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+    <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong>  9092</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
+        <div class="Item_buttons">
+            <button class="Item_Edit_Info">Edit Product Details</button>
+            <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
