@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders</title>
     
-    <!-- this is placeholder code, will add functionality once html pages are all set up -->
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -92,22 +90,27 @@
 <div class="container">
     <div class="order-container">
         <!-- Orders will be dynamically added here -->
+        {% for order in orders %}
         <div class="order">
             <div class="order-details">
-                <p><strong>Order ID:</strong> 123456</p>
-                <p><strong>Date:</strong> January 1, 2024</p>
+                <p><strong>Order ID:</strong> {{ order.OID }}</p>
+                <p><strong>Date:</strong> {{ order.date }}</p>
             </div>
             <div class="order-items">
                 <p><strong>Items:</strong></p>
                 <ul>
-                    <li>Product 1 - $50.00</li>
-                    <li>Product 2 - $40.00</li>
+                    {% for item in order_items %}
+                    {% if item.OID == order.OID %}
+                    <li>{{ item.Title }} - ${{ item.price }}</li>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
             <div class="order-total">
-                <p><strong>Total:</strong> $90.00</p>
+                <p><strong>Total:</strong> ${{ order.total_price }}</p>
             </div>
         </div>
+        {% endfor %}
     </div>
 </div>
 
