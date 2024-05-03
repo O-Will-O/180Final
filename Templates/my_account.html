@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account</title>
     
-    <!-- placeholder text in HTML; replace with SQL code soon -->
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -94,19 +92,19 @@
         <table>
             <tr>
                 <th>Username</th>
-                <td>Customer1</td>
+                <td>{{ user.userName }}</td>
             </tr>
             <tr>
                 <th>Name</th>
-                <td>Jake Statefarm</td>
+                <td>{{ user.name }}</td>
             </tr>
             <tr>
                 <th>Email</th>
-                <td>PlaceholderEmail@email.com</td>
+                <td>{{ user.email }}</td>
             </tr>
             <tr>
                 <th>Account Type</th>
-                <td>Customer</td>
+                <td>{{ user.accountType }}</td>
             </tr>
         </table>
     </div>

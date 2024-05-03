@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
 
-    <!-- code here is placeholder for later when we have all pages complete and can begin linking them together (w/ SQL too) -->
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,15 +54,14 @@
             border: 1px solid #ccc;
             padding: 20px;
             margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .cart-item img {
             max-width: 100px;
             height: auto;
             margin-right: 20px;
-        }
-        .cart-item-details {
-            display: flex;
-            align-items: center;
         }
         .cart-item-details p {
             margin: 0;
@@ -94,7 +91,6 @@
     <h1>Shopping Cart</h1>
 </header>
 
-<!-- link these later!!!! -->
 <nav class="navbar">
     <ul>
         <li><a href="#">Home</a></li>
@@ -105,17 +101,17 @@
     </ul>
 </nav>
 
-<!-- these are all just placeholders -->
 <div class="container">
     <div class="cart-container">
         <!-- Cart items will be added here -->
+        {% for cart_item in cart_items %}
         <div class="cart-item">
             <div class="cart-item-details">
-                <img src="https://via.placeholder.com/150" alt="Product Image">
+                <img src="{{ cart_item.product.imageURL }}" alt="Product Image">
                 <div>
-                    <p><strong>Product Name:</strong> Product 1</p>
-                    <p><strong>Price:</strong> $50.00</p>
-                    <p><strong>Quantity:</strong> 2</p>
+                    <p><strong>Product Name:</strong> {{ cart_item.product.Title }}</p>
+                    <p><strong>Price:</strong> ${{ cart_item.product.price }}</p>
+                    <p><strong>Quantity:</strong> {{ cart_item.quantity }}</p>
                 </div>
             </div>
             <div class="cart-item-actions">
@@ -123,9 +119,10 @@
                 <button>Remove</button>
             </div>
         </div>
+        {% endfor %}
     </div>
     <div class="cart-total">
-        <p><strong>Total:</strong> $100.00</p>
+        <p><strong>Total:</strong> ${{ total_price }}</p>
         <button class="checkout-btn">Proceed to Checkout</button>
     </div>
 </div>
