@@ -15,6 +15,13 @@ engine = create_engine(conn_str, echo=True)
 conn = engine.connect()
 
 
+def noCustAlow():
+    typeU = session["UserType"]
+    if typeU == "Customer":
+        return False
+    elif typeU == "Admin" or typeU == "Vendor":
+        return True
+
 
 def CheckexistUser(username):
      username = str(username)
@@ -33,6 +40,16 @@ def CheckexistEmail(email):
          return True
      else:
         return False
+     
+def incrementID(ID):
+    ID = str(ID)
+    fletter = ID[0]
+    number = int(ID[1:])
+    next = number + 1
+    final = f'{fletter}{next}'
+    return final
+
+
 
 @app.route("/")
 def index():
@@ -102,7 +119,82 @@ def cart():
 
 @app.route('/productpage', methods=['GET', 'POST'])
 def productpage():
-    return render_template('productpage.html')
+    return render_template('product_page.html')
+
+
+@app.route("/AddProducts", methods=["GET", "POST"])
+def AddProducts():
+    if request.method == "POST":
+            result = conn.execute(text("select PID from Products Order By PID DESC;")).fetchone()
+            latestID = result[0]
+            print(latestID)
+            newID = incrementID(latestID)
+            title = request.form["title"]
+            description = request.form["description"]
+            warranty = int(request.form["warranty"])
+            stock = int(request.form["stock"])
+            price = float(request.form["price"])
+            added_by_username = session["Username"]
+            conn.execute(text("insert into Products () values (:newID, :title, :description, :warranty, :stock, :price, :added_by_username);"), {"newID": newID, "added_by_username" : added_by_username, "warranty" : warranty, "stock" : stock, "price" : price, "title" : title, "description" :description})
+            conn.commit()
+            colors = request.form.getlist("color")
+            sizes = request.form.getlist("size")
+            images = request.form.getlist("image")
+            for color in colors:
+                conn.execute(text("insert into ProductColor () values (:newID, :color);"), {"color":color, "newID":newID})
+                conn.commit()
+            for size in sizes:
+                conn.execute(text("insert into ProductSize () values (:newID, :size);"), {"size":size, "newID":newID})
+                conn.commit()
+            for image in images:
+                conn.execute(text("insert into ProductImages () values (:newID, :image);"), {"image":image, "newID":newID})
+                conn.commit()  
+    return render_template("AddProducts.html")
+
+@app.route("/EditProducts", methods=["GET", "POST"])
+def EditProduct():
+    if request.method == "GET":
+        result = conn.execute(text("""SELECT 
+    P.PID,
+    P.Title,
+    P.Description,
+    P.WarrantyPeriod,
+    P.nOfItems,
+    P.price,
+    P.addedByUserName,
+    (
+        SELECT GROUP_CONCAT(D.DiscountAmount) 
+        FROM ProductHasDiscount PHD 
+        JOIN Discounts D ON PHD.DID = D.DID 
+        WHERE PHD.PID = P.PID
+    ) AS DiscountAmounts,
+    (
+        SELECT GROUP_CONCAT(D.timeTillActive) 
+        FROM ProductHasDiscount PHD 
+        JOIN Discounts D ON PHD.DID = D.DID 
+        WHERE PHD.PID = P.PID
+    ) AS TimeTillActive,
+    (
+        SELECT GROUP_CONCAT(PI.imageURL) 
+        FROM ProductImages PI 
+        WHERE PI.PID = P.PID
+    ) AS ImageURLs,
+    (
+        SELECT GROUP_CONCAT(PC.color) 
+        FROM ProductColor PC 
+        WHERE PC.PID = P.PID
+    ) AS Colors,
+    (
+        SELECT GROUP_CONCAT(PS.size) 
+        FROM ProductSize PS 
+        WHERE PS.PID = P.PID
+    ) AS Sizes
+FROM Products P;""")).all()
+        print(result)
+        return render_template("EditProducts.html", result=result)
+    if request.method == "POST":
+        print('Post')
+    return render_template("EditProducts.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
