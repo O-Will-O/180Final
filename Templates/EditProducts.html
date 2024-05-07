@@ -1,64 +1,70 @@
 {% extends "base.html" %}
 {% block body %}
 <style>
-.Parent_Container {
-    width: 100%; /* Adjust this width as needed */
+  .Parent_Container {
+    width: 100%;
+    /* Adjust this width as needed */
     margin: auto;
-    text-align: center; /* Center its child elements horizontally */
-}
+    text-align: center;
+    /* Center its child elements horizontally */
+  }
 
-.Edit_Product_Container
-{
+  .Edit_Product_Container {
     width: fit-content;
     margin: auto;
     display: inline-grid;
     grid-template-columns: 22vw 22vw 22vw 22vw;
-}
+  }
 
-.EP_Product {
+  .EP_Product {
     border: 3px solid #ccc;
     width: 300px;
     padding: 25px;
     margin-bottom: 20px;
     border-radius: 15px;
     background-color: #f9f9f9;
-}
+  }
 
-.EP_Item {
+  .EP_Item {
     margin: 5px 0;
     font-size: 14px;
-}
-.EP_Item strong{
+  }
+
+  .EP_Item strong {
     text-decoration: underline double;
-}
-.Item_title {
+  }
+
+  .Item_title {
     font-size: 18px;
     width: fit-content;
     margin: auto;
-}
+  }
 
-.Item_desc {
+  .Item_desc {
     font-size: 11px;
     color: #555;
     line-height: 15px;
-}
+  }
 
-.Item_price,
-.Item_discount_amount {
-    color: #007bff; /* Blue color for price and discount amount */
-}
+  .Item_price,
+  .Item_discount_amount {
+    color: #007bff;
+    /* Blue color for price and discount amount */
+  }
 
-.Item_Discount_available_to {
-    color: #dc3545; /* Red color for discount expiration */
-}
+  .Item_Discount_available_to {
+    color: #dc3545;
+    /* Red color for discount expiration */
+  }
 
-.Item_buttons {
+  .Item_buttons {
     margin: 15px auto;
     display: flex;
     justify-content: space-evenly;
-}
+  }
 
-.Item_buttons button, .Item_delete button {
+  .Item_buttons button,
+  .Item_delete button {
     width: 125px;
     height: 38px;
     cursor: pointer;
@@ -66,146 +72,167 @@
     border: 3px inset black;
     border-radius: 4px;
     transition: background-color 0.3s ease;
-}
+  }
 
-.Item_buttons button:hover, .Item_delete button:hover {
+  .Item_buttons button:hover,
+  .Item_delete button:hover {
     background-color: #7a8eac;
     border: 3px outset black;
-}
+  }
 
+  .Edit_Form_Container,
+  .Discount_Form_Container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #Edit_Form,
+  #Discount_Form {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 30%;
+    max-width: 100vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .Edit_form_item,
+  .Discount_form_item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .Edit_form_item label,
+  .Discount_form_item label {
+    flex-basis: 30%;
+    /* Adjust label width as needed */
+    text-align: left;
+    margin: auto;
+  }
+
+  .Edit_form_item input,
+  .Edit_form_item textarea,
+  .Discount_form_item input,
+  .Discount_form_item textarea {
+    flex-basis: 60%;
+    /* Adjust input width as needed */
+    margin: auto;
+  }
+
+  .Item_buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .Item_buttons button {
+    width: 48%;
+    height: 38px;
+    cursor: pointer;
+    background-color: #aeaeae;
+    border: 3px inset black;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  .Item_buttons button:hover {
+    background-color: #7a8eac;
+    border: 3px outset black;
+  }
 </style>
 <h1 class="Product_title">Edit Products</h1>
 <div class="Parent_Container">
-<div class="Edit_Product_Container">
+  <div class="Edit_Product_Container">
     <div class="EP_Product">
-        <p class="Item_title EP_Item"><strong>Product Name</strong></p>
-        <p class="Item_PID EP_Item"><strong>PID:</strong>  P1</p>
-        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong>  THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
-        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong>  90 days</p>
-        <p class="Itemstock EP_Item"><strong>STOCK:</strong>  9092</p>
-        <p class="Item_price EP_Item"><strong>PRICE:</strong>  $420.69</p>
-        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong>  VendorNULL</p>
-        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong>  $69.99</p>
-        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong>  2026-12-25</p>
-        <div class="Item_buttons">
-            <button class="Item_Edit_Info">Edit Product Details</button>
-            <button class="Item_Edit_Discount">Apply Product Discount</button>
-        </div>
-        <div class="Item_delete">
-            <button class="Item_Edit_Delete">Delete Product</button>
-        </div>
+      <p class="Item_title EP_Item"><strong>Product Name</strong></p>
+      <p class="Item_PID EP_Item"><strong>PID:</strong> P1</p>
+      <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO
+        IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
+      <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 90 days</p>
+      <p class="Itemstock EP_Item"><strong>STOCK:</strong> 9092</p>
+      <p class="Item_price EP_Item"><strong>PRICE:</strong> $420.69</p>
+      <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULL</p>
+      <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> $69.99</p>
+      <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> 2026-12-25</p>
+      <div class="Item_buttons">
+        <button class="Item_Edit_Info">Edit Product Details</button>
+        <button class="Item_Edit_Discount">Apply Product Discount</button>
+      </div>
+      <div class="Item_delete">
+        <button class="Item_Edit_Delete">Delete Product</button>
+      </div>
     </div>
+  </div>
 </div>
-</div>
-
-<style>
-    .Edit_Form_Container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); 
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #Edit_Form {
-            background-color: #fff;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 10px;
-            width: 30%;
-            max-width: 100vw;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-    .Edit_form_item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-
-    .Edit_form_item label {
-        flex-basis: 30%; /* Adjust label width as needed */
-        text-align: left;
-        margin: auto;
-    }
-
-    .Edit_form_item input, .Edit_form_item textarea {
-        flex-basis: 60%; /* Adjust input width as needed */
-        margin: auto;
-    }
-
-    .Item_buttons {
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .Item_buttons button {
-        width: 48%;
-        height: 38px;
-        cursor: pointer;
-        background-color: #aeaeae;
-        border: 3px inset black;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-    }
-
-    .Item_buttons button:hover {
-        background-color: #7a8eac;
-        border: 3px outset black;
-    }
-
-</style>
 <!-- Hidden edit form -->
 <!--  -->
 <div class="Edit_Form_Container" style="display: none;">
-    <form id="Edit_Form" class="EP_Product">
-        <!-- Editable fields with labels -->
-        <div class="Edit_form_item">
-            <label for="ProductName">Product Name:</label>
-            <input type="text" id="ProductName" placeholder="Product Name"><br>
-        </div> 
-        <div class="Edit_form_item">   
-        <label for="ProductDescription">Description:</label>
-        <textarea id="ProductDescription" cols="23" rows="3"></textarea>
-        <br>
-        </div>
-        <div class="Edit_form_item">
-        <label for="ProductWarranty">Warranty:</label>
-        <input type="text" id="ProductWarranty" placeholder="Warranty"><br>
-        </div>
-        <div class="Edit_form_item">
-        <label for="ProductStock">Stock:</label>
-        <input type="number" id="ProductStock" placeholder="Stock"><br>
-        </div>
-        <div class="Edit_form_item">
-        <label for="ProductPrice">Price:</label>
-        <input type="number" id="ProductPrice" placeholder="Price"><br>
-        </div>
-        <div class="Edit_form_item">
-        <label for="ProductAddedBy">Added By:</label>
-        <input type="text" id="ProductAddedBy" placeholder="Added By"><br>
-        </div>
-        <div class="Edit_form_item">
-        <label for="ProductDiscountDate">Discount Available Till:</label>
-        <input type="date" id="ProductDiscountDate" placeholder="Discount Available Till"><br>
-        </div>
-        <!-- Submit and cancel buttons -->
-        <div class="Item_buttons">
-            <button type="submit" class="Item_Edit_Submit">Save Changes</button>
-            <button type="button" class="Item_Edit_Cancel">Cancel</button>
-        </div>
-    </form>
+  <form id="Edit_Form" class="EP_Product">
+    <!-- Editable fields with labels -->
+    <div class="Edit_form_item">
+      <label for="ProductName">Product Name:</label>
+      <input type="text" id="ProductName" placeholder="Product Name"><br>
+    </div>
+    <div class="Edit_form_item">
+      <label for="ProductDescription">Description:</label>
+      <textarea id="ProductDescription" cols="23" rows="3"></textarea>
+      <br>
+    </div>
+    <div class="Edit_form_item">
+      <label for="ProductWarranty">Warranty:</label>
+      <input type="text" id="ProductWarranty" placeholder="Warranty"><br>
+    </div>
+    <div class="Edit_form_item">
+      <label for="ProductStock">Stock:</label>
+      <input type="number" id="ProductStock" placeholder="Stock"><br>
+    </div>
+    <div class="Edit_form_item">
+      <label for="ProductPrice">Price:</label>
+      <input type="number" id="ProductPrice" placeholder="Price"><br>
+    </div>
+    <div class="Edit_form_item">
+      <label for="ProductAddedBy">Added By:</label>
+      <input type="text" id="ProductAddedBy" placeholder="Added By"><br>
+    </div>
+    <div class="Edit_form_item">
+      <label for="ProductDiscountDate">Discount Available Till:</label>
+      <input type="date" id="ProductDiscountDate" placeholder="Discount Available Till"><br>
+    </div>
+    <!-- Submit and cancel buttons -->
+    <div class="Item_buttons">
+      <button type="submit" class="Item_Edit_Submit">Save Changes</button>
+      <button type="button" class="Item_Edit_Cancel">Cancel</button>
+    </div>
+  </form>
 </div>
 
 
+
+<!-- Hidden Discount form-->
+<!--  -->
+<div class="Discount_Form_Container" style="display: none;">
+  <form id="Discount_Form" class="DP_Product">
+    <!-- Editable fields with labels -->
+    <!-- Submit and cancel buttons -->
+    <div class="Item_buttons">
+      <button type="submit" class="Item_Discount_Submit">Save Changes</button>
+      <button type="button" class="Item_Discount_Cancel">Cancel</button>
+    </div>
+  </form>
+</div>
+
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
     const editButton = document.querySelector('.Item_Edit_Info');
     const editFormContainer = document.querySelector('.Edit_Form_Container');
     const editForm = document.querySelector('#Edit_Form');
@@ -213,16 +240,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Show edit form when edit button is clicked
     editButton.addEventListener('click', function () {
-        editFormContainer.style.display = 'flex';
+      editFormContainer.style.display = 'flex';
     });
 
     // Hide edit form when cancel button is clicked
     cancelButton.addEventListener('click', function () {
-        editFormContainer.style.display = 'none';
+      editFormContainer.style.display = 'none';
     });
 
     // Additional functionality such as form submission handling can be added here
-});
+  });
 
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const editButton = document.querySelector('.Item_Edit_Discount');
+    const editFormContainer = document.querySelector('.Discount_Form_Container');
+    const editForm = document.querySelector('#Discount_Form');
+    const cancelButton = document.querySelector('.Item_Discount_Cancel');
+
+    // Show edit form when edit button is clicked
+    editButton.addEventListener('click', function () {
+      editFormContainer.style.display = 'flex';
+    });
+
+    // Hide edit form when cancel button is clicked
+    cancelButton.addEventListener('click', function () {
+      editFormContainer.style.display = 'none';
+    });
+
+    // Additional functionality such as form submission handling can be added here
+  });
 </script>
 {% endblock %}
