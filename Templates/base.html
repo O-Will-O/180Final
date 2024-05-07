@@ -11,10 +11,16 @@
         <nav>
           <div class="container">
             <ul class="menu">
-              <li><a href="about.html">About</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="portfolio.html">Portfolio</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/cart">Cart</a></li>
+              <li><a href="/MyAccount">My Account</a></li>
+              <li><a href="/productpage">Product Page</a></li>
+              <li><a href="/productpage">Chats</a></li>
+              <li><a href="/productpage">Received Orders</a></li>
+              {% if session["UserType"] == 'Vendor' %}
+                  <li><a href="/AddProduct">Add Products</a></li>
+                  <li><a href="/EditProduct">Edit Products</a></li>
+              {% endif %}
             </ul>
             <div class="logout">
                 <button class="barItem input">
