@@ -104,5 +104,14 @@ def cart():
 def productpage():
     return render_template('productpage.html')
 
+@app.route('/my_account')
+def my_account():
+    if 'loggedin' in session:
+        username = session['Username']
+        user = conn.execute(text("SELECT * FROM Users WHERE userName = :username"), {'username': username}).fetchone()
+        return render_template('my_account.html', user=user)
+    else:
+        return redirect(url_for('login'))
+
 if __name__ == '__main__':
     app.run(debug=True)
