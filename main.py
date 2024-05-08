@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, text
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
-
+import datetime
 app = Flask(__name__)
 app.secret_key = 'secret_key'
 
@@ -191,8 +191,10 @@ def EditProduct():
     ) AS Sizes
 FROM Products P;""")).all()
         discounts = conn.execute(text("Select * from Discounts;")).all()
+        formatted_discounts = [(d[0], d[1], d[2].strftime('%Y-%m-%d') if d[2] is not None else None) for d in discounts]
         print(discounts)
-        return render_template("EditProducts.html", result=result, discounts=discounts)
+        print(formatted_discounts)
+        return render_template("EditProducts.html", result=result, discounts=formatted_discounts)
     if request.method == "POST":
         print('Post')
     return render_template("EditProducts.html")
