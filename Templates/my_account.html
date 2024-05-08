@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Orders</title>
+    <title>My Account</title>
     
     <style>
         body {
@@ -47,34 +47,33 @@
         .navbar ul li a:hover {
             text-decoration: underline;
         }
-        .order-container {
+        .account-info {
             margin-top: 20px;
         }
-        .order {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-bottom: 20px;
+        .account-info table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .order-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+        .account-info table td, .account-info table th {
+            border: 1px solid #ddd;
+            padding: 8px;
         }
-        .order-details p {
-            margin: 0;
+        .account-info table th {
+            background-color: #f2f2f2;
+            text-align: left;
         }
-        .order-total {
-            text-align: right;
-            margin-top: 20px;
-            font-size: 18px;
+        .account-info table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .account-info table tr:hover {
+            background-color: #ddd;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>My Orders</h1>
+    <h1>My Account</h1>
 </header>
 
 <nav class="navbar">
@@ -88,29 +87,26 @@
 </nav>
 
 <div class="container">
-    <div class="order-container">
-        <!-- Orders will be dynamically added here -->
-        {% for order in orders %}
-        <div class="order">
-            <div class="order-details">
-                <p><strong>Order ID:</strong> {{ order.OID }}</p>
-                <p><strong>Date:</strong> {{ order.date }}</p>
-            </div>
-            <div class="order-items">
-                <p><strong>Items:</strong></p>
-                <ul>
-                    {% for item in order_items %}
-                    {% if item.OID == order.OID %}
-                    <li>{{ item.Title }} - ${{ item.price }}</li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="order-total">
-                <p><strong>Total:</strong> ${{ order.total_price }}</p>
-            </div>
-        </div>
-        {% endfor %}
+    <div class="account-info">
+        <h2>User Information</h2>
+        <table>
+            <tr>
+                <th>Username</th>
+                <td>{{ user.userName }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Account Type</th>
+                <td>{{ user.accountType }}</td>
+            </tr>
+        </table>
     </div>
 </div>
 
