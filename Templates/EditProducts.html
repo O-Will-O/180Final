@@ -123,7 +123,8 @@
   .Edit_form_item input,
   .Edit_form_item textarea,
   .Discount_form_item input,
-  .Discount_form_item textarea {
+  .Discount_form_item textarea,
+  .Discount_form_item select {
     flex-basis: 60%;
     /* Adjust input width as needed */
     margin: auto;
@@ -216,14 +217,33 @@
   </form>
 </div>
 
+<style>
 
+
+</style>
 
 <!-- Hidden Discount form-->
 <!--  -->
 <div class="Discount_Form_Container" style="display: none;">
   <form id="Discount_Form" class="DP_Product">
-    <!-- Editable fields with labels -->
-    <!-- Submit and cancel buttons -->
+      <div class="Discount_form_item">
+        <label for="ProductID">Product ID</label>
+        <input type="text" id="ProductID" placeholder="">
+      </div>
+      <div class="Discount_form_item">
+        <label for="OriginalPrice">OriginalPrice</label>
+        <input type="text" id="OriginalPrice">
+      </div>
+      <div class="Discount_form_item">
+        <label for="SelectDiscount">Select Discount</label>
+        <select id="SelectDiscount">
+          <option value=""></option>
+          {% for discount in discounts %}
+              <option value="{{discount}}">{{discount}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
     <div class="Item_buttons">
       <button type="submit" class="Item_Discount_Submit">Save Changes</button>
       <button type="button" class="Item_Discount_Cancel">Cancel</button>
