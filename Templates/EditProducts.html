@@ -3,17 +3,15 @@
 <style>
   .Parent_Container {
     width: 100%;
-    /* Adjust this width as needed */
     margin: auto;
     text-align: center;
-    /* Center its child elements horizontally */
+    display: inline-grid;
+    grid-template-columns: 22vw 22vw 22vw 22vw;
   }
 
   .Edit_Product_Container {
     width: fit-content;
     margin: auto;
-    display: inline-grid;
-    grid-template-columns: 22vw 22vw 22vw 22vw;
   }
 
   .EP_Product {
@@ -115,7 +113,6 @@
   .Edit_form_item label,
   .Discount_form_item label {
     flex-basis: 30%;
-    /* Adjust label width as needed */
     text-align: left;
     margin: auto;
   }
@@ -123,10 +120,13 @@
   .Edit_form_item input,
   .Edit_form_item textarea,
   .Discount_form_item input,
-  .Discount_form_item textarea,
-  .Discount_form_item select {
+  .Discount_form_item textarea {
     flex-basis: 60%;
-    /* Adjust input width as needed */
+    margin: auto;
+  }
+
+  .Discount_form_item select {
+    flex-basis: 61.4%;
     margin: auto;
   }
 
@@ -160,11 +160,51 @@
       <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO
         IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
       <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 90 days</p>
-      <p class="Itemstock EP_Item"><strong>STOCK:</strong> 9092</p>
+      <p class="Item_stock EP_Item"><strong>STOCK:</strong> 9092</p>
       <p class="Item_price EP_Item"><strong>PRICE:</strong> $420.69</p>
       <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULL</p>
       <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> $69.99</p>
       <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> 2026-12-25</p>
+      <div class="Item_buttons">
+        <button class="Item_Edit_Info">Edit Product Details</button>
+        <button class="Item_Edit_Discount">Apply Product Discount</button>
+      </div>
+      <div class="Item_delete">
+        <button class="Item_Edit_Delete">Delete Product</button>
+      </div>
+    </div>
+  </div>
+  <div class="Edit_Product_Container">
+    <div class="EP_Product">
+      <p class="Item_title EP_Item"><strong>Product Name2</strong></p>
+      <p class="Item_PID EP_Item"><strong>PID:</strong> P2</p>
+      <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO</p>
+      <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 900 days</p>
+      <p class="Item_stock EP_Item"><strong>STOCK:</strong> 43434</p>
+      <p class="Item_price EP_Item"><strong>PRICE:</strong> $5463.76</p>
+      <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULLlllllll</p>
+      <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> $343434.34</p>
+      <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> 2111-12-01</p>
+      <div class="Item_buttons">
+        <button class="Item_Edit_Info">Edit Product Details</button>
+        <button class="Item_Edit_Discount">Apply Product Discount</button>
+      </div>
+      <div class="Item_delete">
+        <button class="Item_Edit_Delete">Delete Product</button>
+      </div>
+    </div>
+  </div>
+  <div class="Edit_Product_Container">
+    <div class="EP_Product">
+      <p class="Item_title EP_Item"><strong>Product Name2</strong></p>
+      <p class="Item_PID EP_Item"><strong>PID:</strong> P2</p>
+      <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO</p>
+      <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 900 days</p>
+      <p class="Item_stock EP_Item"><strong>STOCK:</strong> 43434</p>
+      <p class="Item_price EP_Item"><strong>PRICE:</strong> $5463.76</p>
+      <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULLlllllll</p>
+      <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> NULL</p>
+      <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> NULL</p>
       <div class="Item_buttons">
         <button class="Item_Edit_Info">Edit Product Details</button>
         <button class="Item_Edit_Discount">Apply Product Discount</button>
@@ -199,15 +239,11 @@
     </div>
     <div class="Edit_form_item">
       <label for="ProductPrice">Price:</label>
-      <input type="number" id="ProductPrice" placeholder="Price"><br>
+      <input type="number" id="ProductPrice" step='0.01' placeholder="Price"><br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductAddedBy">Added By:</label>
       <input type="text" id="ProductAddedBy" placeholder="Added By"><br>
-    </div>
-    <div class="Edit_form_item">
-      <label for="ProductDiscountDate">Discount Available Till:</label>
-      <input type="date" id="ProductDiscountDate" placeholder="Discount Available Till"><br>
     </div>
     <!-- Submit and cancel buttons -->
     <div class="Item_buttons">
@@ -232,14 +268,14 @@
       </div>
       <div class="Discount_form_item">
         <label for="OriginalPrice">OriginalPrice</label>
-        <input type="text" id="OriginalPrice">
+        <input type="text" id="OriginalPrice" step='0.01'>
       </div>
       <div class="Discount_form_item">
         <label for="SelectDiscount">Select Discount</label>
         <select id="SelectDiscount">
           <option value=""></option>
           {% for discount in discounts %}
-              <option value="{{discount}}">{{discount}}</option>
+              <option value="{{discount}}">{{discount[0]}}, {{discount[1]}}, {{discount[2]}}</option>
           {% endfor %}
         </select>
       </div>
@@ -253,14 +289,36 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const editButton = document.querySelector('.Item_Edit_Info');
+    const editButtons = document.querySelectorAll('.Item_Edit_Info');
     const editFormContainer = document.querySelector('.Edit_Form_Container');
     const editForm = document.querySelector('#Edit_Form');
     const cancelButton = document.querySelector('.Item_Edit_Cancel');
 
-    // Show edit form when edit button is clicked
-    editButton.addEventListener('click', function () {
-      editFormContainer.style.display = 'flex';
+    // Function to populate the edit form with product details
+    function populateEditForm(productElement) {
+      const productName = productElement.querySelector('.Item_title').innerText;
+      const productDescription = productElement.querySelector('.Item_desc').innerText.split(':')[1].trim();
+      const productWarranty = productElement.querySelector('.Item_Warranty').innerText.split(':')[1].trim();
+      const productStock = productElement.querySelector('.Item_stock').innerText.split(':')[1].trim();
+      const productPrice = productElement.querySelector('.Item_price').innerText.split('$')[1].trim();
+      const productAddedBy = productElement.querySelector('.Item_AddedBy').innerText.split(':')[1].trim();
+
+      // Populate the form fields with the extracted data
+      editForm.querySelector('#ProductName').value = productName;
+      editForm.querySelector('#ProductDescription').value = productDescription;
+      editForm.querySelector('#ProductWarranty').value = productWarranty;
+      editForm.querySelector('#ProductStock').value = productStock;
+      editForm.querySelector('#ProductPrice').value = productPrice;
+      editForm.querySelector('#ProductAddedBy').value = productAddedBy;
+    }
+
+    // Show edit form and populate it with data when edit button is clicked
+    editButtons.forEach(function (editButton) {
+      editButton.addEventListener('click', function () {
+        const productParent = editButton.closest('.EP_Product');
+        populateEditForm(productParent);
+        editFormContainer.style.display = 'flex';
+      });
     });
 
     // Hide edit form when cancel button is clicked
@@ -271,25 +329,41 @@
     // Additional functionality such as form submission handling can be added here
   });
 
-
-
   document.addEventListener('DOMContentLoaded', function () {
-    const editButton = document.querySelector('.Item_Edit_Discount');
-    const editFormContainer = document.querySelector('.Discount_Form_Container');
-    const editForm = document.querySelector('#Discount_Form');
-    const cancelButton = document.querySelector('.Item_Discount_Cancel');
+    const discountButtons = document.querySelectorAll('.Item_Edit_Discount');
+    const discountFormContainer = document.querySelector('.Discount_Form_Container');
+    const discountForm = document.querySelector('#Discount_Form');
+    const cancelDiscountButton = document.querySelector('.Item_Discount_Cancel');
 
-    // Show edit form when edit button is clicked
-    editButton.addEventListener('click', function () {
-      editFormContainer.style.display = 'flex';
+    // Function to populate the discount form with product ID and original price
+    function populateDiscountForm(productElement) {
+      const productId = productElement.querySelector('.Item_PID').innerText.split(':')[1].trim();
+      const originalPrice = productElement.querySelector('.Item_price').innerText.split('$')[1];
+
+      // Populate the form fields with the extracted data
+      discountForm.querySelector('#ProductID').value = productId;
+      discountForm.querySelector('#OriginalPrice').value = originalPrice;
+    }
+
+    // Show discount form and populate it with data when discount button is clicked
+    discountButtons.forEach(function (discountButton) {
+      discountButton.addEventListener('click', function () {
+        const productParent = discountButton.closest('.EP_Product');
+        populateDiscountForm(productParent);
+        discountFormContainer.style.display = 'flex';
+      });
     });
 
-    // Hide edit form when cancel button is clicked
-    cancelButton.addEventListener('click', function () {
-      editFormContainer.style.display = 'none';
+    // Hide discount form when cancel button is clicked
+    cancelDiscountButton.addEventListener('click', function () {
+      discountFormContainer.style.display = 'none';
     });
 
     // Additional functionality such as form submission handling can be added here
   });
 </script>
+
+
+
+
 {% endblock %}
