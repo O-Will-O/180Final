@@ -47,12 +47,10 @@
   .Item_price,
   .Item_discount_amount {
     color: #007bff;
-    /* Blue color for price and discount amount */
   }
 
   .Item_Discount_available_to {
     color: #dc3545;
-    /* Red color for discount expiration */
   }
 
   .Item_buttons {
@@ -243,7 +241,7 @@
     </div>
     <div class="Edit_form_item">
       <label for="ProductAddedBy">Added By:</label>
-      <input type="text" id="ProductAddedBy" placeholder="Added By"><br>
+      <input type="text" id="ProductAddedBy" placeholder="Added By" disabled><br>
     </div>
     <!-- Submit and cancel buttons -->
     <div class="Item_buttons">
@@ -264,15 +262,15 @@
   <form id="Discount_Form" class="DP_Product">
       <div class="Discount_form_item">
         <label for="ProductID">Product ID</label>
-        <input type="text" id="ProductID" placeholder="">
+        <input type="text" id="ProductID" placeholder="" disabled>
       </div>
       <div class="Discount_form_item">
         <label for="OriginalPrice">OriginalPrice</label>
-        <input type="text" id="OriginalPrice" step='0.01'>
+        <input type="number" id="OriginalPrice" step='0.01' disabled>
       </div>
       <div class="Discount_form_item">
         <label for="SelectDiscount">Select Discount</label>
-        <select id="SelectDiscount">
+        <select id="SelectDiscount" onchange="DiscountChangeDisplay()">
           <option value=""></option>
           {% for discount in discounts %}
               <option value="{{discount}}">{{discount[0]}}, {{discount[1]}}, {{discount[2]}}</option>
@@ -361,8 +359,50 @@
 
     // Additional functionality such as form submission handling can be added here
   });
-</script>
 
+
+  function DiscountChangeDisplay() {
+  // Remove existing div with ID "DiscountChange" if it exists
+  const existingDiv = document.getElementById("DiscountChange");
+  if (existingDiv) {
+    existingDiv.remove();
+  }
+
+  let originalPrice = parseFloat(document.getElementById("OriginalPrice").value);
+  console.log(originalPrice);
+  let discount = document.getElementById("SelectDiscount").value;
+  const regex = /'([^']*)', ([\d.]+), '([^']*)'/g;
+  let match;
+
+  while ((match = regex.exec(discount)) !== null) {
+    var discountID = match[1];
+    var discountAmount = parseFloat(match[2]);
+    var discountTillDate = match[3];
+  }
+
+  let div = document.createElement("div");
+  div.id = "DiscountChange";
+  let innerDiv = `
+    <div class="Discount_form_item">
+      <label for="DiscountID">Discount ID</label>
+      <input type="text" id="DiscountID" placeholder="" disabled value="${discountID}">
+    </div>
+
+    <div class="Discount_form_item">
+      <label for="ChangedPrice">ChangedPrice</label>
+      <input type="number" id="ChangedPrice" step='0.01' disabled value="${originalPrice - discountAmount}">
+    </div>
+
+    <div class="Discount_form_item">
+      <label for="DateTill">DateTill</label>
+      <input type="date" id="DateTill" placeholder="" disabled value="${discountTillDate}">
+    </div>
+  `;
+  div.innerHTML = innerDiv;
+  document.getElementById("Discount_Form").appendChild(div);
+}
+
+</script>
 
 
 
