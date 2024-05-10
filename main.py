@@ -3,14 +3,14 @@ from sqlalchemy import create_engine, text
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
-
+import datetime
 app = Flask(__name__)
 app.secret_key = 'secret_key'
 
 
 
 # connection string is in the format mysql://user:password@server/database
-conn_str = "mysql://root:CSET155@localhost/180final"
+conn_str = "mysql://root:Ilikegames05!@localhost/180final"
 engine = create_engine(conn_str, echo=True)
 conn = engine.connect()
 
@@ -190,8 +190,11 @@ def EditProduct():
         WHERE PS.PID = P.PID
     ) AS Sizes
 FROM Products P;""")).all()
-        print(result)
-        return render_template("EditProducts.html", result=result)
+        discounts = conn.execute(text("Select * from Discounts;")).all()
+        formatted_discounts = [(d[0], d[1], d[2].strftime('%Y-%m-%d') if d[2] is not None else None) for d in discounts]
+        print(discounts)
+        print(formatted_discounts)
+        return render_template("EditProducts.html", result=result, discounts=formatted_discounts)
     if request.method == "POST":
         print('Post')
     return render_template("EditProducts.html")
