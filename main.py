@@ -10,7 +10,7 @@ app.secret_key = 'secret_key'
 
 
 # connection string is in the format mysql://user:password@server/database
-conn_str = "mysql://root:Ilikegames05!@localhost/180final"
+conn_str = "mysql://root:CSET155@localhost/180final"
 engine = create_engine(conn_str, echo=True)
 conn = engine.connect()
 
@@ -207,6 +207,26 @@ def my_account():
         return render_template('my_account.html', user=user)
     else:
         return redirect(url_for('login'))
+
+@app.route('/my_orders')
+def my_orders():
+    # Fetch orders from the database
+    with connection.cursor() as cursor:
+        sql = "SELECT * FROM Orders"
+        cursor.execute(sql)
+        orders = cursor.fetchall()
+
+        # Fetch order items for each order
+        for order in orders:
+            sql = "SELECT Products.Title, Products.price FROM CartHasProduct JOIN Products ON CartHasProduct.PID = Products.PID WHERE CartHasProduct.cartID = %s"
+            cursor.execute(sql, (order['OID'],))
+            order['order_items'] = cursor.fetchall()
+
+            # Calculate total price for each order
+            total_price = sum(item['price'] for item in order['order_items'])
+            order['total_price'] = total_price
+
+    return render_template('my_orders.html', orders=orders)
 
 if __name__ == '__main__':
     app.run(debug=True)
