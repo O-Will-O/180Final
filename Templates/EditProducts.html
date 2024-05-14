@@ -305,7 +305,7 @@
       </div>
 
     <div class="Item_buttons">
-      <button type="submit" class="Item_Discount_Submit" disabled onclick="document.getElementById('EditDiscountTitle').disabled = false; document.getElementById('ProductID').disabled = false; document.getElementById('DiscountID').disabled = false; document.getElementById('ChangedPrice').disabled = false; document.getElementById('DateTill').disabled = false;">Save Changes</button>
+      <button type="submit" class="Item_Discount_Submit" disabled onclick="document.getElementById('EditDiscountTitle').disabled = false; document.getElementById('ProductID').disabled = false; document.getElementById('DiscountID').disabled = false;">Save Changes</button>
       <button type="button" class="Item_Discount_Cancel">Cancel</button>
     </div>
   </form>
@@ -362,6 +362,7 @@
 
     // Function to populate the discount form with product ID and original price
     function populateDiscountForm(productElement) {
+      document.getElementById("SelectDiscount").value = ""
       const productId = productElement.querySelector('.Item_PID').innerText.split(':')[1].trim();
       const originalPrice = productElement.querySelector('.Item_price').innerText.split('$')[1];
 
