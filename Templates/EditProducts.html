@@ -5,7 +5,7 @@
     width: 100%;
     margin: auto;
     text-align: center;
-    display: inline-grid;
+    display: grid;
     grid-template-columns: 22vw 22vw 22vw 22vw;
   }
 
@@ -148,6 +148,25 @@
     background-color: #7a8eac;
     border: 3px outset black;
   }
+
+  .Popup_Title
+  {
+    display: flex;
+    justify-content: center;
+  }
+
+  #EditDiscountTitle, #EditDetailsTitle {
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+  width: 250px;
+}
+
 </style>
 <h1 class="Product_title">Edit Products</h1>
 <div class="Parent_Container">
@@ -214,38 +233,39 @@
   </div>
 </div>
 <!-- Hidden edit form -->
-<!--  -->
 <div class="Edit_Form_Container" style="display: none;">
-  <form id="Edit_Form" class="EP_Product">
-    <!-- Editable fields with labels -->
+  <form id="Edit_Form" class="EP_Product" action="/EditProducts" method="POST">
+    <div class="Popup_Title">
+      <input type="text" id="EditDetailsTitle" name="EditTitle" value="Edit Product Details" disabled>
+    </div>
+    <br>
     <div class="Edit_form_item">
       <label for="ProductName">Product Name:</label>
-      <input type="text" id="ProductName" placeholder="Product Name"><br>
+      <input type="text" id="ProductName" name="ProductName" placeholder="Product Name"><br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductDescription">Description:</label>
-      <textarea id="ProductDescription" cols="23" rows="3"></textarea>
+      <textarea id="ProductDescription" name="ProductDescription" cols="23" rows="3"></textarea>
       <br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductWarranty">Warranty:</label>
-      <input type="text" id="ProductWarranty" placeholder="Warranty"><br>
+      <input type="text" id="ProductWarranty" name="ProductWarranty" placeholder="Warranty"><br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductStock">Stock:</label>
-      <input type="number" id="ProductStock" placeholder="Stock"><br>
+      <input type="number" id="ProductStock" name="ProductStock" placeholder="Stock"><br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductPrice">Price:</label>
-      <input type="number" id="ProductPrice" step='0.01' placeholder="Price"><br>
+      <input type="number" id="ProductPrice" name="ProductPrice" step='0.01' placeholder="Price"><br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductAddedBy">Added By:</label>
-      <input type="text" id="ProductAddedBy" placeholder="Added By" disabled><br>
+      <input type="text" id="ProductAddedBy" name="ProductAddedBy" placeholder="Added By" disabled><br>
     </div>
-    <!-- Submit and cancel buttons -->
     <div class="Item_buttons">
-      <button type="submit" class="Item_Edit_Submit">Save Changes</button>
+      <button type="submit" class="Item_Edit_Submit" onclick="document.getElementById('EditDetailsTitle').disabled = false;">Save Changes</button>
       <button type="button" class="Item_Edit_Cancel">Cancel</button>
     </div>
   </form>
@@ -257,20 +277,22 @@
 </style>
 
 <!-- Hidden Discount form-->
-<!--  -->
 <div class="Discount_Form_Container" style="display: none;">
-  <form id="Discount_Form" class="DP_Product">
+  <form id="Discount_Form" class="DP_Product" action="/EditProducts" method="POST">
+    <div class="Popup_Title">
+      <input type="text" id="EditDiscountTitle" name="EditTitle" value="Edit Discount Details" disabled>
+    </div>
       <div class="Discount_form_item">
         <label for="ProductID">Product ID</label>
-        <input type="text" id="ProductID" placeholder="" disabled>
+        <input type="text" id="ProductID" name="ProductID" placeholder="" disabled>
       </div>
       <div class="Discount_form_item">
         <label for="OriginalPrice">OriginalPrice</label>
-        <input type="number" id="OriginalPrice" step='0.01' disabled>
+        <input type="number" id="OriginalPrice" name="OriginalPrice" step='0.01' disabled>
       </div>
       <div class="Discount_form_item">
         <label for="SelectDiscount">Select Discount</label>
-        <select id="SelectDiscount" onchange="DiscountChangeDisplay()">
+        <select id="SelectDiscount" name="SelectDiscount" onchange="DiscountChangeDisplay()">
           <option value=""></option>
           {% for discount in discounts %}
               <option value="{{discount}}">{{discount[0]}}, {{discount[1]}}, {{discount[2]}}</option>
@@ -279,7 +301,7 @@
       </div>
 
     <div class="Item_buttons">
-      <button type="submit" class="Item_Discount_Submit">Save Changes</button>
+      <button type="submit" class="Item_Discount_Submit" onclick="document.getElementById('EditDiscountTitle').disabled = false;">Save Changes</button>
       <button type="button" class="Item_Discount_Cancel">Cancel</button>
     </div>
   </form>
@@ -291,12 +313,14 @@
     const editFormContainer = document.querySelector('.Edit_Form_Container');
     const editForm = document.querySelector('#Edit_Form');
     const cancelButton = document.querySelector('.Item_Edit_Cancel');
+    const submitButton = document.querySelector('.Item_Edit_Submit');
 
     // Function to populate the edit form with product details
     function populateEditForm(productElement) {
       const productName = productElement.querySelector('.Item_title').innerText;
       const productDescription = productElement.querySelector('.Item_desc').innerText.split(':')[1].trim();
-      const productWarranty = productElement.querySelector('.Item_Warranty').innerText.split(':')[1].trim();
+      let productWarranty = productElement.querySelector('.Item_Warranty').innerText.split(':')[1].trim();
+      productWarranty = productWarranty.split('d')[0].trim()
       const productStock = productElement.querySelector('.Item_stock').innerText.split(':')[1].trim();
       const productPrice = productElement.querySelector('.Item_price').innerText.split('$')[1].trim();
       const productAddedBy = productElement.querySelector('.Item_AddedBy').innerText.split(':')[1].trim();
@@ -323,8 +347,6 @@
     cancelButton.addEventListener('click', function () {
       editFormContainer.style.display = 'none';
     });
-
-    // Additional functionality such as form submission handling can be added here
   });
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -362,24 +384,45 @@
 
 
   function DiscountChangeDisplay() {
-  // Remove existing div with ID "DiscountChange" if it exists
-  const existingDiv = document.getElementById("DiscountChange");
-  if (existingDiv) {
-    existingDiv.remove();
+  let discountSelect = document.getElementById("SelectDiscount");
+  let selectedValue = discountSelect.value.trim(); 
+
+  if (selectedValue === '') {
+    let existingDiv = document.getElementById("DiscountChange");
+    if (existingDiv) {
+      existingDiv.remove();
+    }
+    return; 
   }
 
   let originalPrice = parseFloat(document.getElementById("OriginalPrice").value);
   console.log(originalPrice);
-  let discount = document.getElementById("SelectDiscount").value;
+  let discount = selectedValue;
   const regex = /'([^']*)', ([\d.]+), '([^']*)'/g;
   let match;
 
-  while ((match = regex.exec(discount)) !== null) {
+  while ((match = regex.exec(discount))) {
+    console.log(match[1])
     var discountID = match[1];
     var discountAmount = parseFloat(match[2]);
+    console.log(match[3])
     var discountTillDate = match[3];
   }
 
+
+  if (discountID == undefined)
+  {
+    const regex = /'([^']*)', ([\d.]+)/g; // Updated regex to exclude the date
+    let match;
+
+    while ((match = regex.exec(discount)) !== null) {
+      var discountID = match[1];
+      var discountAmount = parseFloat(match[2]);
+    }
+    var discountTillDate = "None";
+  }
+
+  console.log(discountID)
   let div = document.createElement("div");
   div.id = "DiscountChange";
   let innerDiv = `
@@ -392,15 +435,29 @@
       <label for="ChangedPrice">ChangedPrice</label>
       <input type="number" id="ChangedPrice" step='0.01' disabled value="${originalPrice - discountAmount}">
     </div>
-
-    <div class="Discount_form_item">
-      <label for="DateTill">DateTill</label>
-      <input type="date" id="DateTill" placeholder="" disabled value="${discountTillDate}">
-    </div>
   `;
+  // Only add DateTill input if discountTillDate is not "NULL"
+  if (discountTillDate !== 'NULL') {
+    innerDiv += `
+      <div class="Discount_form_item">
+        <label for="DateTill">DateTill</label>
+        <input type="text" id="DateTill" placeholder="" disabled value="${discountTillDate}">
+      </div>
+    `;
+  }
   div.innerHTML = innerDiv;
+
+  let existingDiv = document.getElementById("DiscountChange");
+  if (existingDiv) {
+    existingDiv.remove();
+  }
+
   document.getElementById("Discount_Form").appendChild(div);
 }
+
+
+
+
 
 </script>
 

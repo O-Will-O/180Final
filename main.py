@@ -196,7 +196,13 @@ FROM Products P;""")).all()
         print(formatted_discounts)
         return render_template("EditProducts.html", result=result, discounts=formatted_discounts)
     if request.method == "POST":
-        print('Post')
+        print(request.form)  # Print all form data for debugging
+        edit_title = request.form.get("EditTitle")
+        if edit_title == 'Edit Product Details':
+            print("It worked")
+            # conn.execute(text("Insert Into Products () values ();"), request.form)
+        if edit_title == 'Edit Discount Details':
+            print("Itttttttttttttttttttttttttttttttttttttttttttt")
     return render_template("EditProducts.html")
 
 @app.route('/my_account')
