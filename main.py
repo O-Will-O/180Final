@@ -137,6 +137,8 @@ def AddProducts():
             added_by_username = session["Username"]
             conn.execute(text("insert into Products () values (:newID, :title, :description, :warranty, :stock, :price, :added_by_username);"), {"newID": newID, "added_by_username" : added_by_username, "warranty" : warranty, "stock" : stock, "price" : price, "title" : title, "description" :description})
             conn.commit()
+            conn.execute(text("Insert Into ProductHasDiscount (PID) values (:newID);"), {"newID": newID})
+            conn.commit()
             colors = request.form.getlist("color")
             sizes = request.form.getlist("size")
             images = request.form.getlist("image")
@@ -200,10 +202,11 @@ FROM Products P;""")).all()
         edit_title = request.form.get("ProductAddedBy")
         print(edit_title)
         if edit_title == 'Edit Product Details':
-            print("It worked")
             conn.execute(text("Update Products Set Title = :ProductName, Description = :ProductDescription, WarrantyPeriod = :ProductWarranty, nOfItems = :ProductStock, price = :ProductPrice, addedByUserName = :ProductAddedBy Where PID = :ProductID"), request.form)
+            # conn.commit()
         if edit_title == 'Edit Discount Details':
-            print("Itttttttttttttttttttttttttttttttttttttttttttt")
+            conn.execute(text("Update ProductHasDiscount Set DID = :DiscountID Where PID = :ProductID;"), request.form)
+            # conn.commit()
     return render_template("EditProducts.html")
 
 @app.route('/my_account')
