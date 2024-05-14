@@ -64,6 +64,17 @@
         .order-details p {
             margin: 0;
         }
+        .order-items {
+            margin-bottom: 10px;
+        }
+        .order-items ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .order-items ul li {
+            margin-bottom: 5px;
+        }
         .order-total {
             text-align: right;
             margin-top: 20px;
@@ -99,10 +110,8 @@
             <div class="order-items">
                 <p><strong>Items:</strong></p>
                 <ul>
-                    {% for item in order_items %}
-                    {% if item.OID == order.OID %}
+                    {% for item in order.order_items %}
                     <li>{{ item.Title }} - ${{ item.price }}</li>
-                    {% endif %}
                     {% endfor %}
                 </ul>
             </div>

@@ -3,205 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
     <title>Product Page</title>
-
     <style>
+        /* styles.css */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
         }
+        
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-        .navbar {
-            background-color: #444;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .navbar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        .navbar ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .navbar ul li a:hover {
-            text-decoration: underline;
-        }
-        .search-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            width: 300px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .filter-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        select {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin: 0 10px;
-        }
-        .product-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-gap: 20px;
-        }
+        
         .product {
-            border: 1px solid #ccc;
+            background-color: #fff;
             padding: 20px;
+            margin-bottom: 20px;
             border-radius: 5px;
-            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        
         .product img {
             max-width: 100%;
             height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .product-details {
+            margin-bottom: 20px;
+        }
+        
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
             margin-bottom: 10px;
         }
-        .product h2 {
-            margin-top: 0;
+        
+        .product-description {
+            margin-bottom: 10px;
         }
-        .product p {
-            margin: 5px 0;
+        
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: #0056b3;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .quantity-label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        
+        .cart-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cart-btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search by name, description, or vendor">
+    <div class="container">
+        {% for product in products %}
+        <div class="product">
+            <img src="{{ product.image }}" alt="Product Image">
+            <div class="product-details">
+                <h2 class="product-title">{{ product.title }}</h2>
+                <p class="product-description">{{ product.description }}</p>
+                <p class="product-price">$ {{ product.price }}</p>
+                <div class="product-actions">
+                    <div>
+                        <label for="quantity{{ product.id }}" class="quantity-label">Quantity:</label>
+                        <input type="number" id="quantity{{ product.id }}" class="quantity-input" value="1" min="1">
+                    </div>
+                    <button class="button cart-btn" onclick="addToCart({{ product.id }})">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    
-    <div class="filter-container">
-        <select id="filterOptions">
-            <option value="">Filter Options</option>
-            <option value="category">Category</option>
-            <option value="color">Color</option>
-            <option value="size">Size</option>
-            <option value="availability">Availability</option>
-        </select>
-        <select id="filterValues">
-            <option value="">-- Select a filter option --</option>
-        </select>
-    </div>
-
-    <div class="product-container" id="productContainer">
-        <!-- Products will be added here -->
-    </div>
-</div>
-
-<script>
-    const filterOptions = document.getElementById('filterOptions');
-    const filterValues = document.getElementById('filterValues');
-
-    const filterData = {
-        category: ['Electronics', 'Clothing', 'Books', 'Home & Kitchen'],
-        color: ['Red', 'Blue', 'Green', 'Yellow'],
-        size: ['Small', 'Medium', 'Large', 'XL'],
-        availability: ['In Stock', 'Out of Stock']
-    };
-
-    function populateFilterValues(selectedOption) {
-        filterValues.innerHTML = '<option value="">-- Select a filter option --</option>';
-
-        const values = filterData[selectedOption];
-
-        values.forEach(value => {
-            const option = document.createElement('option');
-            option.value = value.toLowerCase().replace(/\s+/g, '_');
-            option.textContent = value;
-            filterValues.appendChild(option);
-        });
-    }
-
-    filterOptions.addEventListener('change', function() {
-        const selectedOption = this.value;
-        if (selectedOption) {
-            populateFilterValues(selectedOption);
-        } else {
-            filterValues.innerHTML = '<option value="">-- Select a filter option --</option>';
+    <script>
+        function addToCart(productId) {
+            var quantityInput = document.getElementById('quantity' + productId);
+            var quantity = parseInt(quantityInput.value);
+            // Send an AJAX request to add the product to the cart
+            // Include the product ID and quantity in the request
+            // Update the cart total and display a success message
+            alert('Product added to cart: ' + quantity + ' x Product ' + productId);
         }
-    });
-
-    function fetchProducts() {
-        fetch('/api/products')
-            .then(response => response.json())
-            .then(products => displayProducts(products))
-            .catch(error => console.error('Error fetching products:', error));
-    }
-
-    function displayProducts(products) {
-        const productContainer = document.getElementById('productContainer');
-        productContainer.innerHTML = '';
-
-        products.forEach(product => {
-            const productDiv = document.createElement('div');
-            productDiv.classList.add('product');
-
-            const image = document.createElement('img');
-            image.src = product.imageURL;
-            productDiv.appendChild(image);
-
-            const nameHeading = document.createElement('h2');
-            nameHeading.textContent = product.Title;
-            productDiv.appendChild(nameHeading);
-
-            const descriptionPara = document.createElement('p');
-            descriptionPara.textContent = product.Description;
-            productDiv.appendChild(descriptionPara);
-
-            const vendorPara = document.createElement('p');
-            vendorPara.textContent = 'Vendor: ' + product.addedByUserName;
-            productDiv.appendChild(vendorPara);
-
-            const categoryPara = document.createElement('p');
-            categoryPara.textContent = 'Category: ' + product.category;
-            productDiv.appendChild(categoryPara);
-
-            const colorPara = document.createElement('p');
-            colorPara.textContent = 'Color: ' + product.color;
-            productDiv.appendChild(colorPara);
-
-            const sizePara = document.createElement('p');
-            sizePara.textContent = 'Size: ' + product.size;
-            productDiv.appendChild(sizePara);
-
-            const availabilityPara = document.createElement('p');
-            availabilityPara.textContent = 'Availability: ' + product.availability;
-            productDiv.appendChild(availabilityPara);
-
-            productContainer.appendChild(productDiv);
-        });
-    }
-
-    fetchProducts();
-</script>
-
+    </script>
 </body>
 </html>
