@@ -196,11 +196,12 @@ FROM Products P;""")).all()
         print(formatted_discounts)
         return render_template("EditProducts.html", result=result, discounts=formatted_discounts)
     if request.method == "POST":
-        print(request.form)  # Print all form data for debugging
-        edit_title = request.form.get("EditTitle")
+        print(request.form)
+        edit_title = request.form.get("ProductAddedBy")
+        print(edit_title)
         if edit_title == 'Edit Product Details':
             print("It worked")
-            # conn.execute(text("Insert Into Products () values ();"), request.form)
+            conn.execute(text("Update Products Set Title = :ProductName, Description = :ProductDescription, WarrantyPeriod = :ProductWarranty, nOfItems = :ProductStock, price = :ProductPrice, addedByUserName = :ProductAddedBy Where PID = :ProductID"), request.form)
         if edit_title == 'Edit Discount Details':
             print("Itttttttttttttttttttttttttttttttttttttttttttt")
     return render_template("EditProducts.html")
