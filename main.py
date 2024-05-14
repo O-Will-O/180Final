@@ -157,46 +157,47 @@ def AddProducts():
 def EditProduct():
     if request.method == "GET":
         result = conn.execute(text("""SELECT 
-    P.PID,
-    P.Title,
-    P.Description,
-    P.WarrantyPeriod,
-    P.nOfItems,
-    P.price,
-    P.addedByUserName,
-    (
-        SELECT GROUP_CONCAT(D.DiscountAmount) 
-        FROM ProductHasDiscount PHD 
-        JOIN Discounts D ON PHD.DID = D.DID 
-        WHERE PHD.PID = P.PID
-    ) AS DiscountAmounts,
-    (
-        SELECT GROUP_CONCAT(D.timeTillActive) 
-        FROM ProductHasDiscount PHD 
-        JOIN Discounts D ON PHD.DID = D.DID 
-        WHERE PHD.PID = P.PID
-    ) AS TimeTillActive,
-    (
-        SELECT GROUP_CONCAT(PI.imageURL) 
-        FROM ProductImages PI 
-        WHERE PI.PID = P.PID
-    ) AS ImageURLs,
-    (
-        SELECT GROUP_CONCAT(PC.color) 
-        FROM ProductColor PC 
-        WHERE PC.PID = P.PID
-    ) AS Colors,
-    (
-        SELECT GROUP_CONCAT(PS.size) 
-        FROM ProductSize PS 
-        WHERE PS.PID = P.PID
-    ) AS Sizes
-FROM Products P;""")).all()
+            P.PID,
+            P.Title,
+            P.Description,
+            P.WarrantyPeriod,
+            P.nOfItems,
+            P.price,
+            P.addedByUserName,
+            (
+                SELECT GROUP_CONCAT(D.DiscountAmount) 
+                FROM ProductHasDiscount PHD 
+                JOIN Discounts D ON PHD.DID = D.DID 
+                WHERE PHD.PID = P.PID
+            ) AS DiscountAmounts,
+            (
+                SELECT GROUP_CONCAT(D.timeTillActive) 
+                FROM ProductHasDiscount PHD 
+                JOIN Discounts D ON PHD.DID = D.DID 
+                WHERE PHD.PID = P.PID
+            ) AS TimeTillActive,
+            (
+                SELECT GROUP_CONCAT(PI.imageURL) 
+                FROM ProductImages PI 
+                WHERE PI.PID = P.PID
+            ) AS ImageURLs,
+            (
+                SELECT GROUP_CONCAT(PC.color) 
+                FROM ProductColor PC 
+                WHERE PC.PID = P.PID
+            ) AS Colors,
+            (
+                SELECT GROUP_CONCAT(PS.size) 
+                FROM ProductSize PS 
+                WHERE PS.PID = P.PID
+            ) AS Sizes
+        FROM Products P;""")).all()
         discounts = conn.execute(text("Select * from Discounts;")).all()
         formatted_discounts = [(d[0], d[1], d[2].strftime('%Y-%m-%d') if d[2] is not None else None) for d in discounts]
         print(discounts)
         print(formatted_discounts)
-        return render_template("EditProducts.html", result=result, discounts=formatted_discounts)
+        print(result)
+        return render_template("EditProducts.html", results=result, discounts=formatted_discounts)
     if request.method == "POST":
         print(request.form)
         edit_title = request.form.get("ProductAddedBy")

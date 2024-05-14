@@ -170,67 +170,31 @@
 </style>
 <h1 class="Product_title">Edit Products</h1>
 <div class="Parent_Container">
-  <div class="Edit_Product_Container">
-    <div class="EP_Product">
-      <p class="Item_title EP_Item"><strong>Product Name</strong></p>
-      <p class="Item_PID EP_Item"><strong>PID:</strong> P1</p>
-      <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO
-        IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
-      <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 90 days</p>
-      <p class="Item_stock EP_Item"><strong>STOCK:</strong> 9092</p>
-      <p class="Item_price EP_Item"><strong>PRICE:</strong> $420.69</p>
-      <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULL</p>
-      <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> $69.99</p>
-      <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> 2026-12-25</p>
-      <div class="Item_buttons">
-        <button class="Item_Edit_Info">Edit Product Details</button>
-        <button class="Item_Edit_Discount">Apply Product Discount</button>
-      </div>
-      <div class="Item_delete">
-        <button class="Item_Edit_Delete">Delete Product</button>
-      </div>
-    </div>
-  </div>
-  <div class="Edit_Product_Container">
-    <div class="EP_Product">
-      <p class="Item_title EP_Item"><strong>Product Name2</strong></p>
-      <p class="Item_PID EP_Item"><strong>PID:</strong> P2</p>
-      <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO</p>
-      <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 900 days</p>
-      <p class="Item_stock EP_Item"><strong>STOCK:</strong> 43434</p>
-      <p class="Item_price EP_Item"><strong>PRICE:</strong> $5463.76</p>
-      <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULLlllllll</p>
-      <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> $343434.34</p>
-      <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> 2111-12-01</p>
-      <div class="Item_buttons">
-        <button class="Item_Edit_Info">Edit Product Details</button>
-        <button class="Item_Edit_Discount">Apply Product Discount</button>
-      </div>
-      <div class="Item_delete">
-        <button class="Item_Edit_Delete">Delete Product</button>
+{% for result in results %}
+<script>console.log(result)</script>
+    <div class="Edit_Product_Container">
+      <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>{{result[1]}}</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong> {{result[0]}}</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> {{result[2]}}</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> {{result[3]}} days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong> {{result[4]}}</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong> ${{result[5]}}</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> {{result[6]}}</p>
+        {% if result[7] != None %}
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> ${{result[7]}}</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> {{result[8]}}</p>
+        {% endif %}
+        <div class="Item_buttons">
+          <button class="Item_Edit_Info">Edit Product Details</button>
+          <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+        <div class="Item_delete">
+          <button class="Item_Edit_Delete">Delete Product</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="Edit_Product_Container">
-    <div class="EP_Product">
-      <p class="Item_title EP_Item"><strong>Product Name2</strong></p>
-      <p class="Item_PID EP_Item"><strong>PID:</strong> P2</p>
-      <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO</p>
-      <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 900 days</p>
-      <p class="Item_stock EP_Item"><strong>STOCK:</strong> 43434</p>
-      <p class="Item_price EP_Item"><strong>PRICE:</strong> $5463.76</p>
-      <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULLlllllll</p>
-      <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> NULL</p>
-      <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> NULL</p>
-      <div class="Item_buttons">
-        <button class="Item_Edit_Info">Edit Product Details</button>
-        <button class="Item_Edit_Discount">Apply Product Discount</button>
-      </div>
-      <div class="Item_delete">
-        <button class="Item_Edit_Delete">Delete Product</button>
-      </div>
-    </div>
-  </div>
+{% endfor %}
 </div>
 <!-- Hidden edit form -->
 <div class="Edit_Form_Container" style="display: none;">
