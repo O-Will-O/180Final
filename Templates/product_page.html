@@ -119,6 +119,111 @@
         <button class="review-button" onclick="location.href='/review?product_id={{ product.PID }}'">Leave a Review</button>
     </div>
     {% endfor %}
+
+    <div class="product-container" id="productContainer">
+        <!-- Products will be added here -->
+    </div>
+</div>
+
+<script>
+    const filterOptions = document.getElementById('filterOptions');
+    const filterValues = document.getElementById('filterValues');
+
+    const filterData = {
+        category: ['Electronics', 'Clothing', 'Books', 'Home & Kitchen'],
+        color: ['Red', 'Blue', 'Green', 'Yellow'],
+        size: ['Small', 'Medium', 'Large', 'XL'],
+        availability: ['In Stock', 'Out of Stock']
+    };
+
+    function populateFilterValues(selectedOption) {
+        filterValues.innerHTML = '<option value="">-- Select a filter option --</option>';
+
+        const values = filterData[selectedOption];
+
+        values.forEach(value => {
+            const option = document.createElement('option');
+            option.value = value.toLowerCase().replace(/\s+/g, '_');
+            option.textContent = value;
+            filterValues.appendChild(option);
+        });
+    }
+
+    filterOptions.addEventListener('change', function() {
+        const selectedOption = this.value;
+        if (selectedOption) {
+            populateFilterValues(selectedOption);
+        } else {
+            // Reset filter values dropdown if no option is selected
+            filterValues.innerHTML = '<option value="">-- Select a filter option --</option>';
+        }
+    });
+
+    // Sample data for product items (can be replaced with actual data from database)
+    const products = [
+        { name: 'Product 1', description: 'Description of Product 1', vendor: 'Vendor 1', category: 'Electronics', color: 'Red', size: 'Medium', availability: 'In Stock', image: 'https://via.placeholder.com/150' },
+        { name: 'Product 2', description: 'Description of Product 2', vendor: 'Vendor 2', category: 'Clothing', color: 'Blue', size: 'Large', availability: 'Out of Stock', image: 'https://via.placeholder.com/150' },
+        { name: 'Product 3', description: 'Description of Product 3', vendor: 'Vendor 3', category: 'Books', color: 'Green', size: 'Small', availability: 'In Stock', image: 'https://via.placeholder.com/150' },
+        { name: 'Product 4', description: 'Description of Product 4', vendor: 'Vendor 4', category: 'Home & Kitchen', color: 'Yellow', size: 'XL', availability: 'Out of Stock', image: 'https://via.placeholder.com/150' },
+    ];
+
+    function displayProducts(products) {
+    const productContainer = document.getElementById('productContainer');
+    productContainer.innerHTML = '';
+
+    products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product');
+
+        const image = document.createElement('img');
+        image.src = product.image;
+        productDiv.appendChild(image);
+
+        const nameHeading = document.createElement('h2');
+        nameHeading.textContent = product.name;
+        productDiv.appendChild(nameHeading);
+
+        const descriptionPara = document.createElement('p');
+        descriptionPara.textContent = product.description;
+        productDiv.appendChild(descriptionPara);
+
+        const vendorPara = document.createElement('p');
+        vendorPara.textContent = 'Vendor: ' + product.vendor;
+        productDiv.appendChild(vendorPara);
+
+        const categoryPara = document.createElement('p');
+        categoryPara.textContent = 'Category: ' + product.category;
+        productDiv.appendChild(categoryPara);
+
+        const colorPara = document.createElement('p');
+        colorPara.textContent = 'Color: ' + product.color;
+        productDiv.appendChild(colorPara);
+
+        const sizePara = document.createElement('p');
+        sizePara.textContent = 'Size: ' + product.size;
+        productDiv.appendChild(sizePara);
+
+        const availabilityPara = document.createElement('p');
+        availabilityPara.textContent = 'Availability: ' + product.availability;
+        productDiv.appendChild(availabilityPara);
+
+        // Create "Write a Review" button
+        const reviewButton = document.createElement('button');
+        reviewButton.textContent = 'Write a Review';
+        productDiv.appendChild(reviewButton);
+
+        // Event listener for the "Write a Review" button
+        reviewButton.addEventListener('click', function() {
+            // Redirect to review.html when the button is clicked
+            window.location.href = './templates/review.html';
+        });
+
+        productContainer.appendChild(productDiv);
+    });
+}
+    
+    displayProducts(products);
+</script>
 </body>
 </html>
 
