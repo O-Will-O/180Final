@@ -124,7 +124,7 @@ insert into Discounts () values ("D3", 5.50, "2026-12-25");
 insert into Discounts () values ("D4", 1.01, "2026-11-24");
 insert into Discounts () values ("D5", 100.50, "2029-01-01");
 insert into Discounts () values ("D6", 2.50, Null);
-
+    
 
 insert into Products () values ("P1", "T Shirt", "Blank T Shirt", 60, 1000, 15.99, "Vendor1");
 insert into ProductHasDiscount () values ("P1", "D3");

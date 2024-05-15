@@ -117,9 +117,10 @@ def signup():
 def cart():
     return render_template('cart.html')
 
-@app.route('/productpage', methods=['GET', 'POST'])
-def productpage():
-    return render_template('product_page.html')
+@app.route('/product_page', methods=['GET', 'POST'])
+def product_page():
+    products = conn.execute(text("SELECT * FROM Products")).fetchall()
+    return render_template('product_page.html', products=products)
 
 
 @app.route("/AddProducts", methods=["GET", "POST"])
