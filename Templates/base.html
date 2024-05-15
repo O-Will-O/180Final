@@ -17,8 +17,8 @@
               <li><a href="{{ url_for('product_page') }}">Product Page</a></li>
               <li><a href="{{ url_for('my_orders') }}">Received Orders</a></li>
               {% if session["UserType"] == 'Vendor' %}
-                  <li><a href="/AddProduct">Add Products</a></li>
-                  <li><a href="/EditProduct">Edit Products</a></li>
+                  <li><a href="/AddProducts">Add Products</a></li>
+                  <li><a href="/EditProducts">Edit Products</a></li>
               {% endif %}
             </ul>
             <div class="logout">
