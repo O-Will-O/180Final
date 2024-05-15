@@ -166,7 +166,10 @@
   margin-bottom: 10px;
   width: 250px;
 }
-
+.ProductImage
+{
+  width: 50px;
+}
 </style>
 <h1 class="Product_title">Edit Products</h1>
 <div class="Parent_Container">
@@ -185,6 +188,12 @@
         <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> ${{result[7]}}</p>
         <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> {{result[8]}}</p>
         {% endif %}
+        <p class="Item_colors EP_Item"><strong>COLORS:</strong> {{ result[10] }}</p>
+            <p class="Item_sizes EP_Item"><strong>SIZES:</strong> {{ result[11] }}</p>
+            <p class="Item_images EP_Item"><strong>IMAGES:</strong></p>
+            {% for image in result[9].split(',') %}
+                <img src="{{ image }}" alt="Product Image" class="ProductImage">
+            {% endfor %}
         <div class="Item_buttons">
           <button class="Item_Edit_Info">Edit Product Details</button>
           <button class="Item_Edit_Discount">Apply Product Discount</button>
