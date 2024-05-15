@@ -224,7 +224,7 @@ def my_account():
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="jedi4890",
+    password="Ilikegames05!",
     database="180Final"
 )
 
@@ -266,7 +266,7 @@ def chat():
 @app.route('/my_orders')
 def my_orders():
     # Fetch orders from the database
-    with connection.cursor() as cursor:
+    with db.cursor() as cursor:
         sql = "SELECT * FROM Orders"
         cursor.execute(sql)
         orders = cursor.fetchall()
