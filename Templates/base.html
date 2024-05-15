@@ -14,7 +14,7 @@
               <li><a href="/">Home</a></li>
               <li><a href="{{ url_for('cart') }}">Cart</a></li>
               <li><a href="{{ url_for('my_account') }}">My Account</a></li>
-              <li><a href="{{ url_for('productpage') }}">Product Page</a></li>
+              <li><a href="{{ url_for('product_page') }}">Product Page</a></li>
               <li><a href="{{ url_for('my_orders') }}">Received Orders</a></li>
               {% if session["UserType"] == 'Vendor' %}
                   <li><a href="/AddProduct">Add Products</a></li>
