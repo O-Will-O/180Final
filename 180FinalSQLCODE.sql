@@ -101,14 +101,11 @@ placedByUserName varchar(50),
 foreign key (placedByUserName) references Users(userName)
 );
 
-create table Messages (
-messageID varchar(50) primary key,
-text varchar(400),
-imageURL varchar(200),
-writerUserName varchar(50), 
-receiverUserName varchar(50),
-foreign key (writerUserName) references Users(userName),
-foreign key (receiverUserName) references Users(userName)
+CREATE TABLE Messages (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Sender VARCHAR(255),
+    Recipient VARCHAR(255),
+    Content TEXT
 );
 
 insert into Users () values ("Customer1", "John Doe", "ThisMaEmail@email.com", "Cpass", "Customer");

@@ -165,48 +165,59 @@
     ];
 
     function displayProducts(products) {
-        const productContainer = document.getElementById('productContainer');
-        productContainer.innerHTML = '';
+    const productContainer = document.getElementById('productContainer');
+    productContainer.innerHTML = '';
 
-        products.forEach(product => {
-            const productDiv = document.createElement('div');
-            productDiv.classList.add('product');
+    products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product');
 
-            const image = document.createElement('img');
-            image.src = product.image;
-            productDiv.appendChild(image);
+        const image = document.createElement('img');
+        image.src = product.image;
+        productDiv.appendChild(image);
 
-            const nameHeading = document.createElement('h2');
-            nameHeading.textContent = product.name;
-            productDiv.appendChild(nameHeading);
+        const nameHeading = document.createElement('h2');
+        nameHeading.textContent = product.name;
+        productDiv.appendChild(nameHeading);
 
-            const descriptionPara = document.createElement('p');
-            descriptionPara.textContent = product.description;
-            productDiv.appendChild(descriptionPara);
+        const descriptionPara = document.createElement('p');
+        descriptionPara.textContent = product.description;
+        productDiv.appendChild(descriptionPara);
 
-            const vendorPara = document.createElement('p');
-            vendorPara.textContent = 'Vendor: ' + product.vendor;
-            productDiv.appendChild(vendorPara);
+        const vendorPara = document.createElement('p');
+        vendorPara.textContent = 'Vendor: ' + product.vendor;
+        productDiv.appendChild(vendorPara);
 
-            const categoryPara = document.createElement('p');
-            categoryPara.textContent = 'Category: ' + product.category;
-            productDiv.appendChild(categoryPara);
+        const categoryPara = document.createElement('p');
+        categoryPara.textContent = 'Category: ' + product.category;
+        productDiv.appendChild(categoryPara);
 
-            const colorPara = document.createElement('p');
-            colorPara.textContent = 'Color: ' + product.color;
-            productDiv.appendChild(colorPara);
+        const colorPara = document.createElement('p');
+        colorPara.textContent = 'Color: ' + product.color;
+        productDiv.appendChild(colorPara);
 
-            const sizePara = document.createElement('p');
-            sizePara.textContent = 'Size: ' + product.size;
-            productDiv.appendChild(sizePara);
+        const sizePara = document.createElement('p');
+        sizePara.textContent = 'Size: ' + product.size;
+        productDiv.appendChild(sizePara);
 
-            const availabilityPara = document.createElement('p');
-            availabilityPara.textContent = 'Availability: ' + product.availability;
-            productDiv.appendChild(availabilityPara);
+        const availabilityPara = document.createElement('p');
+        availabilityPara.textContent = 'Availability: ' + product.availability;
+        productDiv.appendChild(availabilityPara);
 
-            productContainer.appendChild(productDiv);
+        // Create "Write a Review" button
+        const reviewButton = document.createElement('button');
+        reviewButton.textContent = 'Write a Review';
+        productDiv.appendChild(reviewButton);
+
+        // Event listener for the "Write a Review" button
+        reviewButton.addEventListener('click', function() {
+            // Redirect to review.html when the button is clicked
+            window.location.href = './templates/review.html';
         });
-    }
+
+        productContainer.appendChild(productDiv);
+    });
+}
     
     displayProducts(products);
 </script>

@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from sqlalchemy import create_engine, text
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
+import mysql.connector
 import re
 
 app = Flask(__name__)
@@ -10,7 +11,7 @@ app.secret_key = 'secret_key'
 
 
 # connection string is in the format mysql://user:password@server/database
-conn_str = "mysql://root:CSET155@localhost/180final"
+conn_str = "mysql://root:jedi4890@localhost/180final"
 engine = create_engine(conn_str, echo=True)
 conn = engine.connect()
 
@@ -204,6 +205,48 @@ def my_account():
         return render_template('my_account.html', user=user)
     else:
         return redirect(url_for('login'))
+
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="jedi4890",
+    database="180Final"
+)
+
+# Function to fetch messages from the database
+def fetch_messages(sender, recipient):
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Messages WHERE (Sender = %s AND Recipient = %s) OR (Sender = %s AND Recipient = %s) ORDER BY ID", (sender, recipient, recipient, sender))
+    messages = cursor.fetchall()
+    return messages
+
+# Function to save a new message to the database
+def save_message(sender, recipient, content):
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO Messages (Sender, Recipient, Content) VALUES (%s, %s, %s)", (sender, recipient, content))
+    db.commit()
+
+# Endpoint to send a message
+@app.route('/send', methods=['POST'])
+def send_message():
+    data = request.json
+    sender = data['sender']
+    recipient = data['recipient']
+    content = data['content']
+    save_message(sender, recipient, content)
+    return jsonify({"success": True})
+
+# Endpoint to fetch messages
+@app.route('/messages', methods=['GET'])
+def get_messages():
+    sender = request.args.get('sender')
+    recipient = request.args.get('recipient')
+    messages = fetch_messages(sender, recipient)
+    return jsonify(messages)
+
+@app.route('/chat', methods=['GET', 'POST'])
+def chat():
+    return render_template('chat.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
