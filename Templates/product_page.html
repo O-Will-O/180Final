@@ -220,6 +220,14 @@
 }
     
     displayProducts(products);
+
+    const reviewButton = document.createElement('button');
+        reviewButton.textContent = 'Write a Review';
+        productDiv.appendChild(reviewButton);
+
+        reviewButton.addEventListener('click', function() {
+            window.location.href = './templates/review.html';
+        });
 </script>
 </body>
 </html>
