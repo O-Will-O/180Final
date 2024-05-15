@@ -9,9 +9,7 @@ app = Flask(__name__)
 app.secret_key = 'secret_key'
 
 
-
-# connection string is in the format mysql://user:password@server/database
-conn_str = "mysql://root:jedi4890@localhost/180final"
+conn_str = "mysql://root:CSET155@localhost/180final"
 engine = create_engine(conn_str, echo=True)
 conn = engine.connect()
 
