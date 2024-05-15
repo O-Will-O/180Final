@@ -5,7 +5,7 @@
     width: 100%;
     margin: auto;
     text-align: center;
-    display: inline-grid;
+    display: grid;
     grid-template-columns: 22vw 22vw 22vw 22vw;
   }
 
@@ -47,12 +47,10 @@
   .Item_price,
   .Item_discount_amount {
     color: #007bff;
-    /* Blue color for price and discount amount */
   }
 
   .Item_Discount_available_to {
     color: #dc3545;
-    /* Red color for discount expiration */
   }
 
   .Item_buttons {
@@ -150,104 +148,101 @@
     background-color: #7a8eac;
     border: 3px outset black;
   }
+
+  .Popup_Title
+  {
+    display: flex;
+    justify-content: center;
+  }
+
+  #EditDiscountTitle, #EditDetailsTitle {
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+  width: 250px;
+}
+.ProductImage
+{
+  width: 50px;
+}
 </style>
 <h1 class="Product_title">Edit Products</h1>
 <div class="Parent_Container">
-  <div class="Edit_Product_Container">
-    <div class="EP_Product">
-      <p class="Item_title EP_Item"><strong>Product Name</strong></p>
-      <p class="Item_PID EP_Item"><strong>PID:</strong> P1</p>
-      <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO
-        IJDSFJIJO ISD FOJIJ OISFDDSn ijsjdffoisdfj sdiof sosjf</p>
-      <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 90 days</p>
-      <p class="Item_stock EP_Item"><strong>STOCK:</strong> 9092</p>
-      <p class="Item_price EP_Item"><strong>PRICE:</strong> $420.69</p>
-      <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULL</p>
-      <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> $69.99</p>
-      <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> 2026-12-25</p>
-      <div class="Item_buttons">
-        <button class="Item_Edit_Info">Edit Product Details</button>
-        <button class="Item_Edit_Discount">Apply Product Discount</button>
-      </div>
-      <div class="Item_delete">
-        <button class="Item_Edit_Delete">Delete Product</button>
-      </div>
-    </div>
-  </div>
-  <div class="Edit_Product_Container">
-    <div class="EP_Product">
-      <p class="Item_title EP_Item"><strong>Product Name2</strong></p>
-      <p class="Item_PID EP_Item"><strong>PID:</strong> P2</p>
-      <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO</p>
-      <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 900 days</p>
-      <p class="Item_stock EP_Item"><strong>STOCK:</strong> 43434</p>
-      <p class="Item_price EP_Item"><strong>PRICE:</strong> $5463.76</p>
-      <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULLlllllll</p>
-      <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> $343434.34</p>
-      <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> 2111-12-01</p>
-      <div class="Item_buttons">
-        <button class="Item_Edit_Info">Edit Product Details</button>
-        <button class="Item_Edit_Discount">Apply Product Discount</button>
-      </div>
-      <div class="Item_delete">
-        <button class="Item_Edit_Delete">Delete Product</button>
+{% for result in results %}
+<script>console.log(result)</script>
+    <div class="Edit_Product_Container">
+      <div class="EP_Product">
+        <p class="Item_title EP_Item"><strong>{{result[1]}}</strong></p>
+        <p class="Item_PID EP_Item"><strong>PID:</strong> {{result[0]}}</p>
+        <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> {{result[2]}}</p>
+        <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> {{result[3]}} days</p>
+        <p class="Item_stock EP_Item"><strong>STOCK:</strong> {{result[4]}}</p>
+        <p class="Item_price EP_Item"><strong>PRICE:</strong> ${{result[5]}}</p>
+        <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> {{result[6]}}</p>
+        {% if result[7] != None %}
+        <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> ${{result[7]}}</p>
+        <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> {{result[8]}}</p>
+        {% endif %}
+        <p class="Item_colors EP_Item"><strong>COLORS:</strong> {{ result[10] }}</p>
+            <p class="Item_sizes EP_Item"><strong>SIZES:</strong> {{ result[11] }}</p>
+            <p class="Item_images EP_Item"><strong>IMAGES:</strong></p>
+            {% for image in result[9].split(',') %}
+                <img src="{{ image }}" alt="Product Image" class="ProductImage">
+            {% endfor %}
+        <div class="Item_buttons">
+          <button class="Item_Edit_Info">Edit Product Details</button>
+          <button class="Item_Edit_Discount">Apply Product Discount</button>
+        </div>
+        <div class="Item_delete">
+          <button class="Item_Edit_Delete">Delete Product</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="Edit_Product_Container">
-    <div class="EP_Product">
-      <p class="Item_title EP_Item"><strong>Product Name2</strong></p>
-      <p class="Item_PID EP_Item"><strong>PID:</strong> P2</p>
-      <p class="Item_desc EP_Item"><strong>DESCRIPTION:</strong> THiS IS A Description OIFJF ODI JDFJ IOSDFJIO IJFDSO</p>
-      <p class="Item_Warranty EP_Item"><strong>WARRANTY:</strong> 900 days</p>
-      <p class="Item_stock EP_Item"><strong>STOCK:</strong> 43434</p>
-      <p class="Item_price EP_Item"><strong>PRICE:</strong> $5463.76</p>
-      <p class="Item_AddedBy EP_Item"><strong>ADDED BY:</strong> VendorNULLlllllll</p>
-      <p class="Item_discount_amount EP_Item"><strong>DISCOUNT AMOUNT:</strong> NULL</p>
-      <p class="Item_Discount_available_to EP_Item"><strong>DISCOUNT AVAILABLE TILL:</strong> NULL</p>
-      <div class="Item_buttons">
-        <button class="Item_Edit_Info">Edit Product Details</button>
-        <button class="Item_Edit_Discount">Apply Product Discount</button>
-      </div>
-      <div class="Item_delete">
-        <button class="Item_Edit_Delete">Delete Product</button>
-      </div>
-    </div>
-  </div>
+{% endfor %}
 </div>
 <!-- Hidden edit form -->
-<!--  -->
 <div class="Edit_Form_Container" style="display: none;">
-  <form id="Edit_Form" class="EP_Product">
-    <!-- Editable fields with labels -->
+  <form id="Edit_Form" class="EP_Product" action="/EditProducts" method="POST">
+    <div class="Popup_Title">
+      <input type="text" id="EditDetailsTitle" name="EditTitle" value="Edit Product Details" disabled>
+    </div>
+    <br>
+    <div class="Edit_form_item">
+      <label for="ProductID">Product ID:</label>
+      <input type="text" id="ProductID" name="ProductID" placeholder="Product ID" disabled><br>
+    </div>
     <div class="Edit_form_item">
       <label for="ProductName">Product Name:</label>
-      <input type="text" id="ProductName" placeholder="Product Name"><br>
+      <input type="text" id="ProductName" name="ProductName" placeholder="Product Name"><br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductDescription">Description:</label>
-      <textarea id="ProductDescription" cols="23" rows="3"></textarea>
+      <textarea id="ProductDescription" name="ProductDescription" cols="23" rows="3"></textarea>
       <br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductWarranty">Warranty:</label>
-      <input type="text" id="ProductWarranty" placeholder="Warranty"><br>
+      <input type="text" id="ProductWarranty" name="ProductWarranty" placeholder="Warranty"><br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductStock">Stock:</label>
-      <input type="number" id="ProductStock" placeholder="Stock"><br>
+      <input type="number" id="ProductStock" name="ProductStock" placeholder="Stock"><br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductPrice">Price:</label>
-      <input type="number" id="ProductPrice" step='0.01' placeholder="Price"><br>
+      <input type="number" id="ProductPrice" name="ProductPrice" step='0.01' placeholder="Price"><br>
     </div>
     <div class="Edit_form_item">
       <label for="ProductAddedBy">Added By:</label>
-      <input type="text" id="ProductAddedBy" placeholder="Added By"><br>
+      <input type="text" id="ProductAddedBy" name="ProductAddedBy" placeholder="Added By" disabled><br>
     </div>
-    <!-- Submit and cancel buttons -->
     <div class="Item_buttons">
-      <button type="submit" class="Item_Edit_Submit">Save Changes</button>
+      <button type="submit" class="Item_Edit_Submit" onclick="document.getElementById('EditDetailsTitle').disabled = false; document.getElementById('ProductAddedBy').disabled = false; document.getElementById('ProductID').disabled = false;">Save Changes</button>
       <button type="button" class="Item_Edit_Cancel">Cancel</button>
     </div>
   </form>
@@ -259,20 +254,22 @@
 </style>
 
 <!-- Hidden Discount form-->
-<!--  -->
 <div class="Discount_Form_Container" style="display: none;">
-  <form id="Discount_Form" class="DP_Product">
+  <form id="Discount_Form" class="DP_Product" action="/EditProducts" method="POST">
+    <div class="Popup_Title">
+      <input type="text" id="EditDiscountTitle" name="EditTitle" value="Edit Discount Details" disabled>
+    </div>
       <div class="Discount_form_item">
         <label for="ProductID">Product ID</label>
-        <input type="text" id="ProductID" placeholder="">
+        <input type="text" id="ProductID" name="ProductID" placeholder="Product ID" disabled>
       </div>
       <div class="Discount_form_item">
         <label for="OriginalPrice">OriginalPrice</label>
-        <input type="text" id="OriginalPrice" step='0.01'>
+        <input type="number" id="OriginalPrice" name="OriginalPrice" step='0.01' disabled>
       </div>
       <div class="Discount_form_item">
         <label for="SelectDiscount">Select Discount</label>
-        <select id="SelectDiscount">
+        <select id="SelectDiscount" name="SelectDiscount" onchange="DiscountChangeDisplay()">
           <option value=""></option>
           {% for discount in discounts %}
               <option value="{{discount}}">{{discount[0]}}, {{discount[1]}}, {{discount[2]}}</option>
@@ -281,7 +278,7 @@
       </div>
 
     <div class="Item_buttons">
-      <button type="submit" class="Item_Discount_Submit">Save Changes</button>
+      <button type="submit" class="Item_Discount_Submit" disabled onclick="document.getElementById('EditDiscountTitle').disabled = false; document.getElementById('ProductID').disabled = false; document.getElementById('DiscountID').disabled = false;">Save Changes</button>
       <button type="button" class="Item_Discount_Cancel">Cancel</button>
     </div>
   </form>
@@ -293,17 +290,21 @@
     const editFormContainer = document.querySelector('.Edit_Form_Container');
     const editForm = document.querySelector('#Edit_Form');
     const cancelButton = document.querySelector('.Item_Edit_Cancel');
+    const submitButton = document.querySelector('.Item_Edit_Submit');
 
-    // Function to populate the edit form with product details
+    
     function populateEditForm(productElement) {
+      const productID = productElement.querySelector('.Item_PID').innerText.split(':')[1].trim();
       const productName = productElement.querySelector('.Item_title').innerText;
       const productDescription = productElement.querySelector('.Item_desc').innerText.split(':')[1].trim();
-      const productWarranty = productElement.querySelector('.Item_Warranty').innerText.split(':')[1].trim();
+      let productWarranty = productElement.querySelector('.Item_Warranty').innerText.split(':')[1].trim();
+      productWarranty = productWarranty.split('d')[0].trim()
       const productStock = productElement.querySelector('.Item_stock').innerText.split(':')[1].trim();
       const productPrice = productElement.querySelector('.Item_price').innerText.split('$')[1].trim();
       const productAddedBy = productElement.querySelector('.Item_AddedBy').innerText.split(':')[1].trim();
 
-      // Populate the form fields with the extracted data
+      
+      editForm.querySelector('#ProductID').value = productID;
       editForm.querySelector('#ProductName').value = productName;
       editForm.querySelector('#ProductDescription').value = productDescription;
       editForm.querySelector('#ProductWarranty').value = productWarranty;
@@ -312,7 +313,6 @@
       editForm.querySelector('#ProductAddedBy').value = productAddedBy;
     }
 
-    // Show edit form and populate it with data when edit button is clicked
     editButtons.forEach(function (editButton) {
       editButton.addEventListener('click', function () {
         const productParent = editButton.closest('.EP_Product');
@@ -325,8 +325,6 @@
     cancelButton.addEventListener('click', function () {
       editFormContainer.style.display = 'none';
     });
-
-    // Additional functionality such as form submission handling can be added here
   });
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -337,6 +335,7 @@
 
     // Function to populate the discount form with product ID and original price
     function populateDiscountForm(productElement) {
+      document.getElementById("SelectDiscount").value = ""
       const productId = productElement.querySelector('.Item_PID').innerText.split(':')[1].trim();
       const originalPrice = productElement.querySelector('.Item_price').innerText.split('$')[1];
 
@@ -359,10 +358,88 @@
       discountFormContainer.style.display = 'none';
     });
 
-    // Additional functionality such as form submission handling can be added here
   });
-</script>
 
+
+  function DiscountChangeDisplay() {
+  document.querySelector('.Item_Discount_Submit').disabled = false;
+  let discountSelect = document.getElementById("SelectDiscount");
+  let selectedValue = discountSelect.value.trim(); 
+
+  if (selectedValue === '') {
+    document.querySelector('.Item_Discount_Submit').disabled = true;
+    let existingDiv = document.getElementById("DiscountChange");
+    if (existingDiv) {
+      existingDiv.remove();
+    }
+    return; 
+  }
+
+  let originalPrice = parseFloat(document.getElementById("OriginalPrice").value);
+  console.log(originalPrice);
+  let discount = selectedValue;
+  const regex = /'([^']*)', ([\d.]+), '([^']*)'/g;
+  let match;
+
+  while ((match = regex.exec(discount))) {
+    console.log(match[1])
+    var discountID = match[1];
+    var discountAmount = parseFloat(match[2]);
+    console.log(match[3])
+    var discountTillDate = match[3];
+  }
+
+
+  if (discountID == undefined)
+  {
+    const regex = /'([^']*)', ([\d.]+)/g; // Updated regex to exclude the date
+    let match;
+
+    while ((match = regex.exec(discount)) !== null) {
+      var discountID = match[1];
+      var discountAmount = parseFloat(match[2]);
+    }
+    var discountTillDate = "None";
+  }
+
+  console.log(discountID)
+  let div = document.createElement("div");
+  div.id = "DiscountChange";
+  let innerDiv = `
+    <div class="Discount_form_item">
+      <label for="DiscountID">Discount ID</label>
+      <input type="text" id="DiscountID" name="DiscountID" placeholder="" disabled value="${discountID}">
+    </div>
+
+    <div class="Discount_form_item">
+      <label for="ChangedPrice">ChangedPrice</label>
+      <input type="number" id="ChangedPrice" name="ChangedPrice" step='0.01' disabled value="${originalPrice - discountAmount}">
+    </div>
+  `;
+  // Only add DateTill input if discountTillDate is not "NULL"
+  if (discountTillDate !== 'NULL') {
+    innerDiv += `
+      <div class="Discount_form_item">
+        <label for="DateTill">DateTill</label>
+        <input type="text" id="DateTill" name="DateTill" placeholder="" disabled value="${discountTillDate}">
+      </div>
+    `;
+  }
+  div.innerHTML = innerDiv;
+
+  let existingDiv = document.getElementById("DiscountChange");
+  if (existingDiv) {
+    existingDiv.remove();
+  }
+
+  document.getElementById("Discount_Form").appendChild(div);
+}
+
+
+
+
+
+</script>
 
 
 
