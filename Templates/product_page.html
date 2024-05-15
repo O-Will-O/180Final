@@ -107,34 +107,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        {% for product in products %}
-        <div class="product">
-            <img src="{{ product.image }}" alt="Product Image">
-            <div class="product-details">
-                <h2 class="product-title">{{ product.title }}</h2>
-                <p class="product-description">{{ product.description }}</p>
-                <p class="product-price">$ {{ product.price }}</p>
-                <div class="product-actions">
-                    <div>
-                        <label for="quantity{{ product.id }}" class="quantity-label">Quantity:</label>
-                        <input type="number" id="quantity{{ product.id }}" class="quantity-input" value="1" min="1">
-                    </div>
-                    <button class="button cart-btn" onclick="addToCart({{ product.id }})">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+    <h1>Products</h1>
+    {% for product in products %}
+    <div class="product">
+        <h2>{{ product.Title }}</h2>
+        <p>Description: {{ product.Description }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <!-- Add more details here if needed -->
     </div>
-    <script>
-        function addToCart(productId) {
-            var quantityInput = document.getElementById('quantity' + productId);
-            var quantity = parseInt(quantityInput.value);
-            // Send an AJAX request to add the product to the cart
-            // Include the product ID and quantity in the request
-            // Update the cart total and display a success message
-            alert('Product added to cart: ' + quantity + ' x Product ' + productId);
-        }
-    </script>
+    {% endfor %}
 </body>
 </html>
