@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,6 +116,7 @@
         <p>Description: {{ product.Description }}</p>
         <p>Price: ${{ product.price }}</p>
         <!-- Add more details here if needed -->
+        <button class="review-button" onclick="location.href='/review?product_id={{ product.PID }}'">Leave a Review</button>
     </div>
     {% endfor %}
 
@@ -223,3 +226,5 @@
 </script>
 </body>
 </html>
+
+{% endblock %}

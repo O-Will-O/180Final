@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,37 +17,6 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-        .navbar {
-            background-color: #444;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .navbar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        .navbar ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .navbar ul li a:hover {
-            text-decoration: underline;
         }
         .account-info {
             margin-top: 20px;
@@ -72,22 +43,10 @@
 </head>
 <body>
 
-<header>
-    <h1>My Account</h1>
-</header>
-
-<nav class="navbar">
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Register</a></li>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">My Account</a></li>
-        <li><a href="#">Cart</a></li>
-    </ul>
-</nav>
 
 <div class="container">
     <div class="account-info">
+        <br>
         <h2>User Information</h2>
         <table>
             <tr>
@@ -112,3 +71,5 @@
 
 </body>
 </html>
+
+{% endblock %}

@@ -114,9 +114,14 @@ def signup():
             return redirect(url_for("index"))
     return render_template('signup.html')
 
-@app.route('/cart', methods=['GET', 'POST'])
+@app.route('/cart')
 def cart():
-    return render_template('cart.html')
+    if 'cart' in session:
+        cart_items = session['cart']
+        total_price = calculate_total_price(cart_items)
+        return render_template('cart.html', cart_items=cart_items, total_price=total_price)
+    else:
+        return render_template('cart.html', cart_items=[], total_price=0)
 
 @app.route('/product_page', methods=['GET', 'POST'])
 def product_page():
@@ -282,6 +287,17 @@ def my_orders():
             order['total_price'] = total_price
 
     return render_template('my_orders.html', orders=orders)
+
+@app.route('/review', methods=['GET'])
+def review():
+    # Get the product ID from the query parameters
+    product_id = request.args.get('product_id')
+    if product_id:
+        # Render the review page, passing the product ID to the template
+        return render_template('review.html', product_id=product_id)
+    else:
+        # Redirect to the product page if no product ID is provided
+        return redirect(url_for('product_page'))
 
 if __name__ == '__main__':
     app.run(debug=True)
