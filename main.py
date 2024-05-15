@@ -211,10 +211,10 @@ def EditProduct():
         print(edit_title)
         if edit_title == 'Edit Product Details':
             conn.execute(text("Update Products Set Title = :ProductName, Description = :ProductDescription, WarrantyPeriod = :ProductWarranty, nOfItems = :ProductStock, price = :ProductPrice, addedByUserName = :ProductAddedBy Where PID = :ProductID"), request.form)
-            # conn.commit()
+            conn.commit()
         if edit_title == 'Edit Discount Details':
             conn.execute(text("Update ProductHasDiscount Set DID = :DiscountID Where PID = :ProductID;"), request.form)
-            # conn.commit()
+            conn.commit()
     return render_template("EditProducts.html")
 
 @app.route('/my_account')
