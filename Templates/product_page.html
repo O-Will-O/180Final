@@ -1,121 +1,121 @@
-{% extends "base.html" %}
-{% block body %}
-
-
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
     <title>Product Page</title>
-
-<!-- this code is a placeholder for future code, mainly needs replacing for SQL code -->
-
     <style>
+        /* styles.css */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
         }
+        
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-        .navbar {
-            background-color: #444;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .navbar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        .navbar ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .navbar ul li a:hover {
-            text-decoration: underline;
-        }
-        .search-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            width: 300px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .filter-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        select {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin: 0 10px;
-        }
-        .product-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-gap: 20px;
-        }
+        
         .product {
-            border: 1px solid #ccc;
+            background-color: #fff;
             padding: 20px;
+            margin-bottom: 20px;
             border-radius: 5px;
-            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        
         .product img {
             max-width: 100%;
             height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .product-details {
+            margin-bottom: 20px;
+        }
+        
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
             margin-bottom: 10px;
         }
-        .product h2 {
-            margin-top: 0;
+        
+        .product-description {
+            margin-bottom: 10px;
         }
-        .product p {
-            margin: 5px 0;
+        
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: #0056b3;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .quantity-label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        
+        .cart-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cart-btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-
-
-<div class="container">
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search by name, description, or vendor">
+    <h1>Products</h1>
+    {% for product in products %}
+    <div class="product">
+        <h2>{{ product.Title }}</h2>
+        <p>Description: {{ product.Description }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <!-- Add more details here if needed -->
     </div>
-    
-    <div class="filter-container">
-        <select id="filterOptions">
-            <option value="">Filter Options</option>
-            <option value="category">Category</option>
-            <option value="color">Color</option>
-            <option value="size">Size</option>
-            <option value="availability">Availability</option>
-        </select>
-        <select id="filterValues">
-            <option value="">-- Select a filter option --</option>
-        </select>
-    </div>
+    {% endfor %}
 
     <div class="product-container" id="productContainer">
         <!-- Products will be added here -->
@@ -221,7 +221,5 @@
     
     displayProducts(products);
 </script>
-
 </body>
-{% endblock %}
-
+</html>

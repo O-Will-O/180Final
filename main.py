@@ -4,7 +4,7 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import mysql.connector
 import re
-
+import datetime
 app = Flask(__name__)
 app.secret_key = 'secret_key'
 
@@ -118,9 +118,10 @@ def signup():
 def cart():
     return render_template('cart.html')
 
-@app.route('/productpage', methods=['GET', 'POST'])
-def productpage():
-    return render_template('product_page.html')
+@app.route('/product_page', methods=['GET', 'POST'])
+def product_page():
+    products = conn.execute(text("SELECT * FROM Products")).fetchall()
+    return render_template('product_page.html', products=products)
 
 
 @app.route("/AddProducts", methods=["GET", "POST"])
@@ -191,8 +192,11 @@ def EditProduct():
         WHERE PS.PID = P.PID
     ) AS Sizes
 FROM Products P;""")).all()
-        print(result)
-        return render_template("EditProducts.html", result=result)
+        discounts = conn.execute(text("Select * from Discounts;")).all()
+        formatted_discounts = [(d[0], d[1], d[2].strftime('%Y-%m-%d') if d[2] is not None else None) for d in discounts]
+        print(discounts)
+        print(formatted_discounts)
+        return render_template("EditProducts.html", result=result, discounts=formatted_discounts)
     if request.method == "POST":
         print('Post')
     return render_template("EditProducts.html")
@@ -247,6 +251,26 @@ def get_messages():
 @app.route('/chat', methods=['GET', 'POST'])
 def chat():
     return render_template('chat.html')
+
+@app.route('/my_orders')
+def my_orders():
+    # Fetch orders from the database
+    with connection.cursor() as cursor:
+        sql = "SELECT * FROM Orders"
+        cursor.execute(sql)
+        orders = cursor.fetchall()
+
+        # Fetch order items for each order
+        for order in orders:
+            sql = "SELECT Products.Title, Products.price FROM CartHasProduct JOIN Products ON CartHasProduct.PID = Products.PID WHERE CartHasProduct.cartID = %s"
+            cursor.execute(sql, (order['OID'],))
+            order['order_items'] = cursor.fetchall()
+
+            # Calculate total price for each order
+            total_price = sum(item['price'] for item in order['order_items'])
+            order['total_price'] = total_price
+
+    return render_template('my_orders.html', orders=orders)
 
 if __name__ == '__main__':
     app.run(debug=True)
